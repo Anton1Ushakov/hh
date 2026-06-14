@@ -13,15 +13,96 @@ load_dotenv()
 
 # API Configuration
 HH_API_BASE = "https://api.hh.ru"
+HH_TOKEN_URL = "https://api.hh.ru/token"
 RATE_LIMIT_DELAY = 0.2  # seconds between requests (max 10 req/sec)
+
+
+class TokenManager:
+    """In-memory OAuth token storage with proactive refresh."""
+
+    def __init__(
+        self,
+        access_token: Optional[str] = None,
+        refresh_token: Optional[str] = None,
+        expires_at: Optional[float] = None,
+    ):
+        self.access_token = access_token
+        self.refresh_token = refresh_token
+        self.expires_at = expires_at
+
+    def apply_token_response(self, data: Dict[str, Any]) -> None:
+        """Store token pair and expiry from HH OAuth response."""
+        if data.get("access_token"):
+            self.access_token = data["access_token"]
+        if data.get("refresh_token"):
+            self.refresh_token = data["refresh_token"]
+        expires_in = data.get("expires_in")
+        if expires_in is not None:
+            self.expires_at = time.time() + float(expires_in)
+        self._sync_env()
+
+    def to_token_dict(self) -> Dict[str, Any]:
+        payload: Dict[str, Any] = {
+            "access_token": self.access_token,
+            "refresh_token": self.refresh_token,
+            "token_type": "bearer",
+        }
+        if self.expires_at is not None:
+            payload["expires_in"] = max(int(self.expires_at - time.time()), 0)
+        return payload
+
+    def _sync_env(self) -> None:
+        if self.access_token:
+            os.environ["HH_ACCESS_TOKEN"] = self.access_token
+        if self.refresh_token:
+            os.environ["HH_REFRESH_TOKEN"] = self.refresh_token
+
+    def is_expired(self, buffer_seconds: int = 300) -> bool:
+        """True if access token is missing or expires within buffer_seconds."""
+        if not self.access_token:
+            return True
+        if self.expires_at is None:
+            return False
+        return time.time() >= (self.expires_at - buffer_seconds)
+
+    def can_refresh(self) -> bool:
+        return bool(self.refresh_token)
+
+    def ensure_access_token(self, force: bool = False) -> None:
+        """Refresh access token if expired or force=True."""
+        if not force and not self.is_expired():
+            return
+        if not self.refresh_token:
+            if not self.access_token:
+                raise Exception("No access token and no refresh token available.")
+            return
+        new_tokens = refresh_access_token(self.refresh_token)
+        self.apply_token_response(new_tokens)
+
+    def force_refresh(self) -> None:
+        """Force refresh — used as fallback on 401."""
+        if not self.refresh_token:
+            raise Exception("No refresh token available.")
+        new_tokens = refresh_access_token(self.refresh_token)
+        self.apply_token_response(new_tokens)
 
 
 class HHAPIClient:
     """Client for HH.ru API with automatic token refresh"""
     
-    def __init__(self, access_token: Optional[str] = None, refresh_token: Optional[str] = None):
-        self.access_token = access_token
-        self.refresh_token = refresh_token
+    def __init__(
+        self,
+        token_manager: Optional[TokenManager] = None,
+        access_token: Optional[str] = None,
+        refresh_token: Optional[str] = None,
+    ):
+        if token_manager is not None:
+            self.token_manager = token_manager
+        else:
+            self.token_manager = TokenManager(
+                access_token=access_token,
+                refresh_token=refresh_token,
+            )
         self.last_request_time = 0
         self.user_agent = os.getenv("HH_USER_AGENT", "HH-Analytics-App/1.0")
     
@@ -37,6 +118,12 @@ class HHAPIClient:
         Returns:
             JSON response as dictionary
         """
+        if self.token_manager:
+            try:
+                self.token_manager.ensure_access_token()
+            except Exception as e:
+                print(f"Proactive token refresh failed: {e}")
+
         # Rate limiting
         elapsed = time.time() - self.last_request_time
         if elapsed < RATE_LIMIT_DELAY:
@@ -46,8 +133,9 @@ class HHAPIClient:
         headers = {
             "User-Agent": self.user_agent
         }
-        if self.access_token:
-            headers["Authorization"] = f"Bearer {self.access_token}"
+        access_token = self.token_manager.access_token if self.token_manager else None
+        if access_token:
+            headers["Authorization"] = f"Bearer {access_token}"
         
         # Make request
         url = f"{HH_API_BASE}{endpoint}"
@@ -55,20 +143,16 @@ class HHAPIClient:
         self.last_request_time = time.time()
         
         # Handle 401 - try to refresh token
-        if response.status_code == 401 and retry_with_refresh and self.refresh_token:
+        if (
+            response.status_code == 401
+            and retry_with_refresh
+            and self.token_manager
+            and self.token_manager.can_refresh()
+        ):
             print("Token expired, refreshing...")
             try:
-                new_tokens = refresh_access_token(self.refresh_token)
-                self.access_token = new_tokens.get("access_token")
-                self.refresh_token = new_tokens.get("refresh_token")
-                
-                # Update environment variables
-                os.environ["HH_ACCESS_TOKEN"] = self.access_token
-                os.environ["HH_REFRESH_TOKEN"] = self.refresh_token
-                
+                self.token_manager.force_refresh()
                 print("Token refreshed successfully!")
-                
-                # Retry request with new token
                 return self._make_request(endpoint, params, retry_with_refresh=False)
             except Exception as e:
                 print(f"Failed to refresh token: {e}")
@@ -83,6 +167,206 @@ class HHAPIClient:
             raise Exception(f"API error: {response.status_code} - {response.text}")
         
         return response.json()
+
+    @staticmethod
+    def build_full_url(endpoint: str, params: Dict[str, Any]) -> str:
+        return f"{HH_API_BASE}{endpoint}?{requests.compat.urlencode(params, doseq=True)}"
+
+    def _build_vacancy_params(
+        self,
+        *,
+        text: Optional[str] = None,
+        area: Optional[str] = None,
+        professional_role: Optional[str] = None,
+        search_everywhere: bool = True,
+        search_in_name: bool = False,
+        search_in_company_name: bool = False,
+        search_in_description: bool = False,
+        employment_form: Optional[str] = None,
+        work_schedule_by_days: Optional[str] = None,
+        work_format: Optional[str] = None,
+        working_hours: Optional[str] = None,
+        experience: Optional[str] = None,
+        education: Optional[str] = None,
+        salary: Optional[int] = None,
+        currency: Optional[str] = None,
+        salary_frequency: Optional[str] = None,
+        salary_mode: Optional[str] = None,
+        industry: Optional[str] = None,
+        employer_id: Optional[str] = None,
+        label: Optional[str] = None,
+        type_: Optional[str] = None,
+        period: Optional[int] = None,
+        order_by: Optional[str] = None,
+        metro: Optional[str] = None,
+        specializations: Optional[str] = None,
+        per_page: int = 1,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {"per_page": per_page}
+        if text:
+            params["text"] = text
+        if area:
+            params["area"] = area
+        if professional_role:
+            params["professional_role"] = professional_role
+        if employment_form:
+            params["employment_form"] = employment_form
+        if work_schedule_by_days:
+            params["work_schedule_by_days"] = work_schedule_by_days
+        if work_format:
+            params["work_format"] = work_format
+        if working_hours:
+            params["working_hours"] = working_hours
+        if experience:
+            params["experience"] = experience
+        if education:
+            params["education"] = education
+        if salary:
+            params["salary"] = salary
+        if currency:
+            params["currency"] = currency
+        if salary_frequency:
+            params["salary_frequency"] = salary_frequency
+        if salary_mode:
+            params["salary_mode"] = salary_mode
+        if industry:
+            params["industry"] = industry
+        if employer_id:
+            params["employer_id"] = employer_id
+        if label:
+            params["label"] = label
+        if type_:
+            params["type"] = type_
+        search_fields = []
+        if not search_everywhere:
+            if search_in_name:
+                search_fields.append("name")
+            if search_in_company_name:
+                search_fields.append("company_name")
+            if search_in_description:
+                search_fields.append("description")
+        if search_fields:
+            params["search_field"] = search_fields
+        if period:
+            params["period"] = period
+        if order_by:
+            params["order_by"] = order_by
+        if metro:
+            params["metro"] = metro
+        if specializations:
+            params["specialization"] = specializations
+        return params
+
+    def _build_resume_params(
+        self,
+        *,
+        text: Optional[str] = None,
+        area: Optional[str] = None,
+        professional_role: Optional[str] = None,
+        text_logic: Optional[str] = None,
+        text_field: Optional[str] = None,
+        text_period: Optional[str] = None,
+        education_levels: Optional[str] = None,
+        relocation: Optional[str] = None,
+        gender: Optional[str] = None,
+        age_from: Optional[int] = None,
+        age_to: Optional[int] = None,
+        experience: Optional[str] = None,
+        employment_form: Optional[str] = None,
+        work_format: Optional[str] = None,
+        salary_from: Optional[int] = None,
+        salary_to: Optional[int] = None,
+        currency: Optional[str] = None,
+        language: Optional[str] = None,
+        language_level: Optional[str] = None,
+        skill: Optional[str] = None,
+        period: Optional[int] = None,
+        order_by: Optional[str] = None,
+        job_search_status: Optional[str] = None,
+        label: Optional[str] = None,
+        per_page: int = 1,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {"per_page": per_page}
+        if text:
+            params["text"] = text
+        if area:
+            params["area"] = area
+        if professional_role:
+            params["professional_role"] = professional_role
+        if text:
+            field = text_field if text_field else "title"
+            params["text.field"] = field
+            params["text.logic"] = text_logic if text_logic else "all"
+            if text_period:
+                params["text.period"] = text_period
+            elif field.startswith("experience"):
+                params["text.period"] = "all_time"
+            else:
+                params["text.period"] = "all_time"
+        if education_levels:
+            params["education_levels"] = education_levels
+        if relocation:
+            params["relocation"] = relocation
+        if gender:
+            params["gender"] = gender
+        if age_from:
+            params["age_from"] = age_from
+        if age_to:
+            params["age_to"] = age_to
+        if experience:
+            params["experience"] = experience
+        if employment_form:
+            params["employment_form"] = employment_form
+        if work_format:
+            params["work_format"] = work_format
+        if salary_from:
+            params["salary_from"] = salary_from
+        if salary_to:
+            params["salary_to"] = salary_to
+        if currency:
+            params["currency"] = currency
+        if language and language_level:
+            params["language"] = f"{language.strip()}.{language_level.strip()}"
+        elif language:
+            params["language"] = language.strip()
+        if skill:
+            params["skill"] = skill
+        if period:
+            params["period"] = period
+        if order_by:
+            params["order_by"] = order_by
+        if job_search_status:
+            params["job_search_status"] = job_search_status
+        if label:
+            params["label"] = label
+        return params
+
+    def search_vacancies_detail(self, **kwargs) -> Dict[str, Any]:
+        params = self._build_vacancy_params(**kwargs)
+        result = self._make_request("/vacancies", params)
+        return {
+            "found": result.get("found", 0),
+            "params": params,
+            "url": self.build_full_url("/vacancies", params),
+        }
+
+    def search_resumes_detail(self, **kwargs) -> Dict[str, Any]:
+        if not self.token_manager.access_token:
+            raise Exception(
+                "Нет access token для поиска резюме. "
+                "Укажите HH_ACCESS_TOKEN / HH_REFRESH_TOKEN или авторизуйтесь через /auth/login"
+            )
+        params = self._build_resume_params(**kwargs)
+        print(f"\n[RESUME SEARCH REQUEST]")
+        print(f"URL: {self.build_full_url('/resumes', params)}")
+        result = self._make_request("/resumes", params)
+        found = result.get("found", 0)
+        print(f"[RESUME SEARCH RESPONSE] Found: {found}\n")
+        return {
+            "found": found,
+            "params": params,
+            "url": self.build_full_url("/resumes", params),
+        }
     
     def search_vacancies(
         self,
@@ -154,79 +438,34 @@ class HHAPIClient:
         Returns:
             Total number of found vacancies
         """
-        params = {"per_page": per_page}
-        
-        # Basic filters
-        if text:
-            params["text"] = text
-        if area:
-            params["area"] = area
-        if professional_role:
-            params["professional_role"] = professional_role
-        
-        # Employment filters (new API)
-        if employment_form:
-            params["employment_form"] = employment_form
-        if work_schedule_by_days:
-            params["work_schedule_by_days"] = work_schedule_by_days
-        if work_format:
-            params["work_format"] = work_format
-        if working_hours:
-            params["working_hours"] = working_hours
-        if experience:
-            params["experience"] = experience
-        
-        # Education filter
-        if education:
-            params["education"] = education
-        
-        # Salary filters
-        if salary:
-            params["salary"] = salary
-        if currency:
-            params["currency"] = currency
-        if salary_frequency:
-            params["salary_frequency"] = salary_frequency
-        if salary_mode:
-            params["salary_mode"] = salary_mode
-        
-        # Additional filters
-        if industry:
-            params["industry"] = industry
-        if employer_id:
-            params["employer_id"] = employer_id
-        if label:
-            params["label"] = label
-        if type_:
-            params["type"] = type_
-        
-        # Search fields - build search field list
-        # If 'everywhere' is checked or no specific fields selected, don't limit search
-        search_fields = []
-        if not search_everywhere:
-            if search_in_name:
-                search_fields.append("name")
-            if search_in_company_name:
-                search_fields.append("company_name")
-            if search_in_description:
-                search_fields.append("description")
-        
-        if search_fields:
-            params["search_field"] = search_fields
-        
-        if period:
-            params["period"] = period
-        if order_by:
-            params["order_by"] = order_by
-        
-        # Geo filters
-        if metro:
-            params["metro"] = metro
-        if specializations:
-            params["specialization"] = specializations
-        
-        result = self._make_request("/vacancies", params)
-        return result.get("found", 0)
+        return self.search_vacancies_detail(
+            text=text,
+            area=area,
+            professional_role=professional_role,
+            search_everywhere=search_everywhere,
+            search_in_name=search_in_name,
+            search_in_company_name=search_in_company_name,
+            search_in_description=search_in_description,
+            employment_form=employment_form,
+            work_schedule_by_days=work_schedule_by_days,
+            work_format=work_format,
+            working_hours=working_hours,
+            experience=experience,
+            education=education,
+            salary=salary,
+            currency=currency,
+            salary_frequency=salary_frequency,
+            salary_mode=salary_mode,
+            industry=industry,
+            employer_id=employer_id,
+            label=label,
+            type_=type_,
+            period=period,
+            order_by=order_by,
+            metro=metro,
+            specializations=specializations,
+            per_page=per_page,
+        )["found"]
     
     def search_resumes(
         self,
@@ -239,21 +478,21 @@ class HHAPIClient:
         text_field: Optional[str] = None,  # everywhere, title, education, skills, experience, experience_company, experience_position, experience_description
         text_period: Optional[str] = None,  # all_time, last_year, last_three_years, last_six_years
         # Personal filters
-        education: Optional[str] = None,
+        education_levels: Optional[str] = None,
         relocation: Optional[str] = None,  # living_or_relocation, living, living_but_relocation, relocation
         gender: Optional[str] = None,  # male, female
         age_from: Optional[int] = None,
         age_to: Optional[int] = None,
         # Work filters
         experience: Optional[str] = None,  # noExperience, between1And3, between3And6, moreThan6
-        employment: Optional[str] = None,
-        schedule: Optional[str] = None,
+        employment_form: Optional[str] = None,  # FULL, PART_TIME, INTERNSHIP, VOLUNTEER
+        work_format: Optional[str] = None,  # ON_SITE, REMOTE, HYBRID, FIELD_WORK, FLY_IN_FLY_OUT
         # Salary filters
         salary_from: Optional[int] = None,
         salary_to: Optional[int] = None,
         currency: Optional[str] = None,
         # Additional filters
-        language: Optional[str] = None,  # Language code
+        language: Optional[str] = None,  # Language code, combined with level as eng.c1
         language_level: Optional[str] = None,  # a1, a2, b1, b2, c1, c2, l1
         skill: Optional[str] = None,  # Skill ID
         period: Optional[int] = None,  # days since last update
@@ -273,18 +512,18 @@ class HHAPIClient:
             text_logic: Search logic (all, any, phrase, except)
             text_field: Search field (everywhere, title, education, skills, experience, experience_company, experience_position, experience_description)
             text_period: Experience period (all_time, last_year, last_three_years, last_six_years)
-            education: Education level (secondary, special_secondary, unfinished_higher, higher, bachelor, master, candidate, doctorate)
-            relocation: Relocation (living_or_relocation, living, living_but_relocation, relocation)
+            education_levels: Education level id from education_level dictionary
+            relocation: Relocation from resume_search_relocation dictionary
             gender: Gender (male, female)
             age_from: Minimum age
             age_to: Maximum age
             experience: Experience level (noExperience, between1And3, between3And6, moreThan6)
-            employment: Employment type (full, part, project, volunteer, probation)
-            schedule: Work schedule (fullDay, shift, flexible, remote, flyInFlyOut)
+            employment_form: From resume_employment_form dictionary (FULL, PART_TIME, etc.)
+            work_format: From resume_work_format dictionary (ON_SITE, REMOTE, etc.)
             salary_from: Minimum desired salary
             salary_to: Maximum desired salary
             currency: Currency code (RUR, USD, EUR, etc)
-            language: Language code (eng, deu, fra, etc)
+            language: Language code (eng, deu, fra, etc) — sent as language.level
             language_level: Language level (a1, a2, b1, b2, c1, c2, l1)
             skill: Key skill ID
             period: Period since last update in days
@@ -296,91 +535,33 @@ class HHAPIClient:
         Returns:
             Total number of found resumes
         """
-        if not self.access_token:
-            # Return mock data if no token
-            return 0
-        
-        params = {"per_page": per_page}
-        
-        # Basic filters
-        if text:
-            params["text"] = text
-        if area:
-            params["area"] = area
-        if professional_role:
-            params["professional_role"] = professional_role
-        
-        # Search fields - use text.* triad for resumes
-        # text.logic: all, any, phrase, except
-        # text.field: everywhere, title, education, skills, experience, experience_company, experience_position, experience_description
-        # text.period: all_time, last_year, last_three_years, last_six_years (required when text.field is experience-related)
-        # Default: text.field=everywhere, text.logic=all
-        if text:
-            params["text.field"] = text_field if text_field else "everywhere"
-            params["text.logic"] = text_logic if text_logic else "all"
-            if text_period:
-                params["text.period"] = text_period
-            elif text_field and text_field.startswith("experience"):
-                # Default period for experience fields
-                params["text.period"] = "all_time"
-        
-        # Personal filters
-        if education:
-            params["education"] = education
-        if relocation:
-            params["relocation"] = relocation
-        if gender:
-            params["gender"] = gender
-        if age_from:
-            params["age_from"] = age_from
-        if age_to:
-            params["age_to"] = age_to
-        
-        # Work filters
-        if experience:
-            params["experience"] = experience
-        if employment:
-            params["employment"] = employment
-        if schedule:
-            params["schedule"] = schedule
-        
-        # Salary filters
-        if salary_from:
-            params["salary_from"] = salary_from
-        if salary_to:
-            params["salary_to"] = salary_to
-        if currency:
-            params["currency"] = currency
-        
-        # Additional filters
-        if language:
-            params["language"] = language
-        if language_level:
-            params["language_level"] = language_level
-        if skill:
-            params["skill"] = skill
-        if period:
-            params["period"] = period
-        if order_by:
-            params["order_by"] = order_by
-        if job_search_status:
-            params["job_search_status"] = job_search_status
-        if label:
-            params["label"] = label
-        
-        try:
-            # Log the request params
-            print(f"\n[RESUME SEARCH REQUEST]")
-            print(f"URL: https://api.hh.ru/resumes")
-            print(f"Params: {params}")
-            print(f"Full URL: https://api.hh.ru/resumes?{requests.compat.urlencode(params, doseq=True)}")
-            result = self._make_request("/resumes", params)
-            print(f"[RESUME SEARCH RESPONSE] Found: {result.get('found', 0)}\n")
-            return result.get("found", 0)
-        except Exception as e:
-            # If resume search fails, return 0
-            print(f"[RESUME SEARCH ERROR] {e}")
-            return 0
+        return self.search_resumes_detail(
+            text=text,
+            area=area,
+            professional_role=professional_role,
+            text_logic=text_logic,
+            text_field=text_field,
+            text_period=text_period,
+            education_levels=education_levels,
+            relocation=relocation,
+            gender=gender,
+            age_from=age_from,
+            age_to=age_to,
+            experience=experience,
+            employment_form=employment_form,
+            work_format=work_format,
+            salary_from=salary_from,
+            salary_to=salary_to,
+            currency=currency,
+            language=language,
+            language_level=language_level,
+            skill=skill,
+            period=period,
+            order_by=order_by,
+            job_search_status=job_search_status,
+            label=label,
+            per_page=per_page,
+        )["found"]
     
     def get_areas(self) -> List[Dict[str, Any]]:
         """Get list of regions/areas"""
@@ -428,16 +609,33 @@ class HHAPIClient:
         """Get list of education levels"""
         return self._make_request("/dictionaries").get("education_level", [])
 
+    def get_vacancy_keyword_suggests(self, text: str) -> List[str]:
+        """Keyword suggestions for vacancy search field"""
+        query = text.strip()
+        if len(query) < 2:
+            return []
+        result = self._make_request("/suggests/vacancy_search_keyword", {"text": query})
+        return [item["text"] for item in result.get("items", []) if item.get("text")]
+
+    def get_professional_role_suggests(self, text: str) -> List[Dict[str, Any]]:
+        """Professional role suggestions for keyword field"""
+        query = text.strip()
+        if len(query) < 2:
+            return []
+        result = self._make_request("/suggests/professional_roles", {"text": query})
+        return result.get("items", [])
+
 
 def get_auth_url() -> str:
-    """Generate OAuth authorization URL"""
+    """Generate OAuth authorization URL for employer access"""
     client_id = os.getenv("HH_CLIENT_ID")
     redirect_uri = os.getenv("HH_REDIRECT_URI")
     return (
         f"https://hh.ru/oauth/authorize?"
         f"response_type=code&"
         f"client_id={client_id}&"
-        f"redirect_uri={redirect_uri}"
+        f"redirect_uri={redirect_uri}&"
+        f"role=employer"
     )
 
 
@@ -448,7 +646,7 @@ def exchange_code_for_token(code: str) -> Dict[str, Any]:
     redirect_uri = os.getenv("HH_REDIRECT_URI")
     
     response = requests.post(
-        "https://hh.ru/oauth/token",
+        HH_TOKEN_URL,
         data={
             "grant_type": "authorization_code",
             "client_id": client_id,
@@ -465,16 +663,11 @@ def exchange_code_for_token(code: str) -> Dict[str, Any]:
 
 
 def refresh_access_token(refresh_token: str) -> Dict[str, Any]:
-    """Refresh access token using refresh token"""
-    client_id = os.getenv("HH_CLIENT_ID")
-    client_secret = os.getenv("HH_CLIENT_SECRET")
-    
+    """Refresh access token using refresh token (HH API spec)"""
     response = requests.post(
-        "https://hh.ru/oauth/token",
+        HH_TOKEN_URL,
         data={
             "grant_type": "refresh_token",
-            "client_id": client_id,
-            "client_secret": client_secret,
             "refresh_token": refresh_token
         }
     )

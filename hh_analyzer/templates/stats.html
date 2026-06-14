@@ -23,7 +23,8 @@
             </tr>
         </thead>
         <tbody>
-            {% for query in queries %}
+            {% for item in queries %}
+            {% set query = item.record %}
             <tr>
                 <td>{{ query.timestamp.strftime('%d.%m.%Y %H:%M') }}</td>
                 <td>{{ query.text or '-' }}</td>
@@ -38,9 +39,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if query.text %}
-                    <a href="/trends?query={{ query.text }}" class="btn btn-small">Тренды</a>
-                    {% endif %}
+                    <a href="/trends?signature={{ item.signature }}&query={{ (query.text or '')|urlencode }}" class="btn btn-small">Тренды</a>
                 </td>
             </tr>
             {% endfor %}

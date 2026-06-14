@@ -7,23 +7,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultsContainer = document.getElementById('results');
     const errorMessage = document.getElementById('error-message');
     const calculateBtn = document.getElementById('calculate-btn');
+    const copyLinkBtn = document.getElementById('copy-link-btn');
+    const debugToggle = document.getElementById('debug-toggle');
+    const debugContainer = document.getElementById('query-debug');
     
-    // Initialize searchable selects
     initSearchableSelects();
-    
-    // Initialize collapsible sections
+    initKeywordSuggest();
     initCollapsibleSections();
+    applyPrefillFromServer();
+    applyPrefillFromUrl();
+    
+    if (debugToggle) {
+        debugToggle.addEventListener('click', function() {
+            document.getElementById('debug-content').classList.toggle('active');
+            debugToggle.classList.toggle('active');
+        });
+    }
+
+    if (copyLinkBtn) {
+        copyLinkBtn.addEventListener('click', async function() {
+            const url = buildShareUrl();
+            try {
+                await navigator.clipboard.writeText(url);
+                copyLinkBtn.textContent = 'Ссылка скопирована';
+                setTimeout(() => { copyLinkBtn.textContent = 'Скопировать ссылку'; }, 2000);
+            } catch (error) {
+                window.prompt('Скопируйте ссылку:', url);
+            }
+        });
+    }
     
     if (form) {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Show loading state
             setLoading(true);
             hideResults();
             hideError();
             
-            // Collect form data
             const formData = new FormData(form);
             
             try {
@@ -36,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (data.success) {
                     showResults(data);
+                    updateShareUrl();
                 } else {
                     showError(data.error || 'Произошла ошибка при расчете');
                 }
@@ -48,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Initialize collapsible sections
     function initCollapsibleSections() {
         const collapsibles = document.querySelectorAll('.collapsible');
         
@@ -61,18 +82,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Initialize resume text.* triad logic
     initResumeTextTriad();
     
     function initResumeTextTriad() {
-        // Auto-set default period when experience field is selected
         const textField = document.getElementById('resume_text_field');
         const textPeriod = document.getElementById('resume_text_period');
         
         if (textField && textPeriod) {
             textField.addEventListener('change', function() {
                 const value = this.value;
-                // If experience-related field is selected and no period set, default to all_time
                 if (value && value.startsWith('experience') && !textPeriod.value) {
                     textPeriod.value = 'all_time';
                 }
@@ -80,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Initialize searchable selects
     function initSearchableSelects() {
         const areaSearch = document.getElementById('area-search');
         const areaList = document.getElementById('area-list');
@@ -89,19 +106,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!areaSearch || !areaList) return;
         
-        // Show list on focus
         areaSearch.addEventListener('focus', function() {
             areaList.classList.add('active');
         });
         
-        // Hide list when clicking outside
         document.addEventListener('click', function(e) {
             if (!areaContainer.contains(e.target)) {
                 areaList.classList.remove('active');
             }
         });
         
-        // Filter options on input
         areaSearch.addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
             const options = areaList.querySelectorAll('.searchable-select-option');
@@ -116,27 +130,189 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Select option on click
         const options = areaList.querySelectorAll('.searchable-select-option');
         options.forEach(option => {
             option.addEventListener('click', function() {
                 const value = this.getAttribute('data-value');
                 const text = this.textContent;
                 
-                // Update hidden select
                 areaSelect.value = value;
-                
-                // Update search input
                 areaSearch.value = text.replace('📍 ', '');
                 
-                // Update visual selection
                 options.forEach(opt => opt.classList.remove('selected'));
                 this.classList.add('selected');
                 
-                // Hide list
                 areaList.classList.remove('active');
             });
         });
+    }
+
+    function initKeywordSuggest() {
+        const input = document.getElementById('text');
+        const list = document.getElementById('keyword-suggest-list');
+        const container = document.getElementById('keyword-suggest-container');
+        const roleSelect = document.getElementById('professional_role');
+
+        if (!input || !list || !container) return;
+
+        let debounceTimer = null;
+        let activeController = null;
+
+        function hideList() {
+            list.classList.remove('active');
+            list.innerHTML = '';
+        }
+
+        function renderSuggestions(data) {
+            list.innerHTML = '';
+            const keywords = data.keywords || [];
+            const roles = data.roles || [];
+
+            if (!keywords.length && !roles.length) {
+                hideList();
+                return;
+            }
+
+            if (keywords.length) {
+                const label = document.createElement('div');
+                label.className = 'suggest-section-label';
+                label.textContent = 'Ключевые слова';
+                list.appendChild(label);
+
+                keywords.forEach(item => {
+                    const option = document.createElement('div');
+                    option.className = 'searchable-select-option suggest-keyword';
+                    option.textContent = item.text;
+                    option.addEventListener('click', () => {
+                        input.value = item.text;
+                        hideList();
+                    });
+                    list.appendChild(option);
+                });
+            }
+
+            if (roles.length) {
+                const label = document.createElement('div');
+                label.className = 'suggest-section-label';
+                label.textContent = 'Профессиональные роли';
+                list.appendChild(label);
+
+                roles.forEach(item => {
+                    const option = document.createElement('div');
+                    option.className = 'searchable-select-option suggest-role';
+                    option.textContent = item.text;
+                    option.addEventListener('click', () => {
+                        input.value = item.text;
+                        if (roleSelect) {
+                            roleSelect.value = item.id;
+                        }
+                        hideList();
+                    });
+                    list.appendChild(option);
+                });
+            }
+
+            list.classList.add('active');
+        }
+
+        async function fetchSuggestions(query) {
+            if (activeController) {
+                activeController.abort();
+            }
+            activeController = new AbortController();
+
+            try {
+                const response = await fetch(
+                    `/api/suggest/keywords?q=${encodeURIComponent(query)}`,
+                    { signal: activeController.signal }
+                );
+                if (!response.ok) {
+                    hideList();
+                    return;
+                }
+                const data = await response.json();
+                renderSuggestions(data);
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    hideList();
+                }
+            }
+        }
+
+        input.addEventListener('focus', function() {
+            const query = this.value.trim();
+            if (query.length >= 2) {
+                fetchSuggestions(query);
+            }
+        });
+
+        input.addEventListener('input', function() {
+            const query = this.value.trim();
+            clearTimeout(debounceTimer);
+
+            if (query.length < 2) {
+                hideList();
+                return;
+            }
+
+            debounceTimer = setTimeout(() => fetchSuggestions(query), 300);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!container.contains(e.target)) {
+                hideList();
+            }
+        });
+    }
+
+    function applyPrefillFromServer() {
+        if (!window.HH_PREFILL || !form) return;
+        applyPrefill(window.HH_PREFILL);
+    }
+
+    function applyPrefillFromUrl() {
+        if (!form) return;
+        const params = Object.fromEntries(new URLSearchParams(window.location.search));
+        if (Object.keys(params).length) {
+            applyPrefill(params);
+        }
+    }
+
+    function applyPrefill(values) {
+        Object.entries(values).forEach(([name, value]) => {
+            if (!value) return;
+            const field = form.elements.namedItem(name);
+            if (!field) return;
+            if (field instanceof RadioNodeList) {
+                [...field].forEach(node => {
+                    if (node.value === value) node.checked = true;
+                });
+            } else {
+                field.value = value;
+            }
+        });
+
+        const areaSelect = document.getElementById('area');
+        const areaSearch = document.getElementById('area-search');
+        if (areaSelect && areaSearch && areaSelect.value) {
+            const selected = areaSelect.options[areaSelect.selectedIndex];
+            if (selected) {
+                areaSearch.value = selected.text.replace('📍 ', '');
+            }
+        }
+    }
+
+    function buildShareUrl() {
+        const params = new URLSearchParams(new FormData(form));
+        [...params.entries()].forEach(([key, value]) => {
+            if (!value) params.delete(key);
+        });
+        return `${window.location.origin}/?${params.toString()}`;
+    }
+
+    function updateShareUrl() {
+        const url = buildShareUrl();
+        window.history.replaceState({}, '', url);
     }
     
     function setLoading(loading) {
@@ -152,29 +328,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showResults(data) {
-        // Update values
         document.getElementById('vacancies-count').textContent = formatNumber(data.vacancies_count);
         document.getElementById('resumes-count').textContent = formatNumber(data.resumes_count);
         document.getElementById('ratio-value').textContent = data.ratio;
         document.getElementById('difference-value').textContent = formatNumber(data.difference);
         
-        // Update timestamp
         const date = new Date(data.timestamp);
         document.getElementById('timestamp').textContent = date.toLocaleString('ru-RU');
         
-        // Update trends link
         const textInput = document.getElementById('text');
-        if (textInput && textInput.value) {
-            document.getElementById('trends-link').href = `/trends?query=${encodeURIComponent(textInput.value)}`;
+        const queryLabel = textInput && textInput.value ? textInput.value : 'запрос';
+        if (data.query_signature) {
+            document.getElementById('trends-link').href =
+                `/trends?signature=${encodeURIComponent(data.query_signature)}&query=${encodeURIComponent(queryLabel)}`;
+        }
+
+        if (data.debug && debugContainer) {
+            document.getElementById('debug-vacancies-note').textContent = data.debug.vacancies.note;
+            document.getElementById('debug-resumes-note').textContent = data.debug.resumes.note;
+            const vacanciesUrl = document.getElementById('debug-vacancies-url');
+            const resumesUrl = document.getElementById('debug-resumes-url');
+            vacanciesUrl.href = data.debug.vacancies.url;
+            vacanciesUrl.textContent = data.debug.vacancies.url;
+            resumesUrl.href = data.debug.resumes.url;
+            resumesUrl.textContent = data.debug.resumes.url;
+            debugContainer.style.display = 'block';
         }
         
-        // Show results
         resultsContainer.style.display = 'block';
         resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
     
     function hideResults() {
         resultsContainer.style.display = 'none';
+        if (debugContainer) debugContainer.style.display = 'none';
     }
     
     function showError(message) {

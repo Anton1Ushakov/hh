@@ -558,6 +558,19 @@ select option:checked {
     display: none;
 }
 
+.suggest-section-label {
+    padding: 0.5rem 0.75rem 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted, #64748b);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.suggest-role {
+    font-weight: 500;
+}
+
 input[type="text"]::placeholder,
 input[type="number"]::placeholder {
     color: #a0aec0;
@@ -787,6 +800,63 @@ input[type="number"]::placeholder {
 
 .result-actions {
     text-align: center;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.auth-banner {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+}
+
+.auth-ok {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.auth-error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.query-debug {
+    margin-top: 1.5rem;
+    text-align: left;
+}
+
+.debug-toggle {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+}
+
+.debug-content {
+    display: none;
+    margin-top: 0.75rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+}
+
+.debug-content.active {
+    display: block;
+}
+
+.debug-content a {
+    display: block;
+    word-break: break-all;
+    margin-bottom: 0.75rem;
+    color: #4c51bf;
 }
 
 /* ===== Error Message ===== */

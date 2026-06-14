@@ -6,6 +6,11 @@
 <div class="page-header">
     <h1>Калькулятор рынка труда</h1>
     <p>Сравните количество вакансий и резюме на hh.ru с разными фильтрами</p>
+    {% if auth_message == 'ok' %}
+    <p class="auth-banner auth-ok">Авторизация HH.ru прошла успешно.</p>
+    {% elif auth_message == 'error' %}
+    <p class="auth-banner auth-error">Ошибка авторизации. Проверьте redirect URI в dev.hh.ru.</p>
+    {% endif %}
 </div>
 
 <div class="calculator-container">
@@ -17,30 +22,16 @@
             
             <div class="form-group">
                 <label for="text">Ключевое слово</label>
-                <input type="text" id="text" name="text" placeholder="Например: Python разработчик">
-            </div>
-
-            <div class="form-group">
-                <label>Где искать (для вакансий):</label>
-                <div class="checkbox-group-horizontal">
-                    <label class="checkbox-inline">
-                        <input type="checkbox" name="search_in_name" value="true" checked>
-                        В названии вакансии
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" name="search_in_company_name" value="true" checked>
-                        В названии компании
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" name="search_in_description" value="true" checked>
-                        В описании
-                    </label>
+                <div class="searchable-select" id="keyword-suggest-container">
+                    <input type="text" id="text" name="text" class="searchable-select-input"
+                           placeholder="Например: Python разработчик" autocomplete="off">
+                    <div class="searchable-select-list" id="keyword-suggest-list"></div>
                 </div>
             </div>
 
-            <!-- Resume Search Fields - text.* triad (hidden, defaults: everywhere, all) -->
+            <!-- Resume Search Fields - text.* triad (hidden, defaults: title, all — aligned with vacancy name search) -->
             <input type="hidden" id="resume_text_logic" name="resume_text_logic" value="all">
-            <input type="hidden" id="resume_text_field" name="resume_text_field" value="everywhere">
+            <input type="hidden" id="resume_text_field" name="resume_text_field" value="title">
 
             <div class="form-row">
                 <!-- Region with search -->
@@ -72,6 +63,21 @@
                             {% for role in roles %}
                             <option value="{{ role.id }}">{{ role.name }}</option>
                             {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="resume_period">Активность соискателя</label>
+                    <div class="select-wrapper">
+                        <select id="resume_period" name="resume_period">
+                            <option value="">За всё время</option>
+                            <option value="1">Обновлялись за 1 день</option>
+                            <option value="3">Обновлялись за 3 дня</option>
+                            <option value="7">Обновлялись за 7 дней</option>
+                            <option value="30" selected>Обновлялись за 30 дней</option>
                         </select>
                     </div>
                 </div>
@@ -301,6 +307,20 @@
                 <span class="collapsible-arrow">▼</span>
             </h3>
             <div class="collapsible-content">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="resume_job_search_status">Статус поиска</label>
+                    <div class="select-wrapper">
+                        <select id="resume_job_search_status" name="resume_job_search_status">
+                            <option value="">Все резюме</option>
+                            {% for status in job_search_statuses %}
+                            <option value="{{ status.id }}">{{ status.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
             
             <div class="form-row">
                 <!-- Education -->
@@ -322,10 +342,10 @@
                     <div class="select-wrapper">
                         <select id="resume_relocation" name="resume_relocation">
                             <option value="">Не важно</option>
-                            <option value="living_or_relocation">Проживает или готов к переезду</option>
-                            <option value="living">Проживает в регионе</option>
-                            <option value="relocation">Готов к переезду</option>
-                            <option value="no_relocation">Не готов к переезду</option>
+                            <option value="living_or_relocation">Живут в регионе или готовы переехать</option>
+                            <option value="living">Живут в указанном регионе</option>
+                            <option value="living_but_relocation">Живут в регионе и готовы к переезду</option>
+                            <option value="relocation">Готовы переехать в регион</option>
                         </select>
                     </div>
                 </div>
@@ -384,27 +404,27 @@
             </div>
 
             <div class="form-row">
-                <!-- Employment -->
+                <!-- Employment form -->
                 <div class="form-group">
-                    <label for="resume_employment">Тип занятости</label>
+                    <label for="resume_employment_form">Тип занятости</label>
                     <div class="select-wrapper">
-                        <select id="resume_employment" name="resume_employment">
+                        <select id="resume_employment_form" name="resume_employment_form">
                             <option value="">Любой</option>
-                            {% for emp in employments %}
+                            {% for emp in resume_employment_forms %}
                             <option value="{{ emp.id }}">{{ emp.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
 
-                <!-- Schedule -->
+                <!-- Work format -->
                 <div class="form-group">
-                    <label for="resume_schedule">График работы</label>
+                    <label for="resume_work_format">Формат работы</label>
                     <div class="select-wrapper">
-                        <select id="resume_schedule" name="resume_schedule">
+                        <select id="resume_work_format" name="resume_work_format">
                             <option value="">Любой</option>
-                            {% for sch in schedules %}
-                            <option value="{{ sch.id }}">{{ sch.name }}</option>
+                            {% for wf in resume_work_formats %}
+                            <option value="{{ wf.id }}">{{ wf.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -424,29 +444,14 @@
                         </select>
                     </div>
                 </div>
-
-                <!-- Period -->
-                <div class="form-group">
-                    <label for="resume_period">Активность</label>
-                    <div class="select-wrapper">
-                        <select id="resume_period" name="resume_period">
-                            <option value="">За всё время</option>
-                            <option value="1">1 день</option>
-                            <option value="3">3 дня</option>
-                            <option value="7">7 дней</option>
-                            <option value="30">30 дней</option>
-                        </select>
-                    </div>
-                </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="resume_language">Язык</label>
+                    <label for="resume_language">Язык (код)</label>
                     <input type="text" id="resume_language" name="resume_language" placeholder="eng, deu, fra...">
                 </div>
 
-                <!-- Language Level -->
                 <div class="form-group">
                     <label for="resume_language_level">Уровень владения</label>
                     <div class="select-wrapper">
@@ -457,21 +462,6 @@
                             {% endfor %}
                         </select>
                     </div>
-                </div>
-            </div>
-
-            <!-- Job Search Status -->
-            <div class="form-group">
-                <label for="resume_job_search_status">Статус поиска</label>
-                <div class="select-wrapper">
-                    <select id="resume_job_search_status" name="resume_job_search_status">
-                        <option value="">Все резюме</option>
-                        <option value="active_search">Активно ищут работу</option>
-                        <option value="looking_for_offers">Рассматривают предложения</option>
-                        <option value="not_looking_for_job">Не ищут работу</option>
-                        <option value="has_job_offer">Предложили работу, решает</option>
-                        <option value="accepted_job_offer">Вышел на новое место</option>
-                    </select>
                 </div>
             </div>
             </div>
@@ -518,8 +508,23 @@
             <p>Данные актуальны на: <span id="timestamp">-</span></p>
         </div>
 
+        <div id="query-debug" class="query-debug" style="display: none;">
+            <button type="button" class="collapsible-header debug-toggle" id="debug-toggle">
+                <span>Как считали</span>
+                <span class="collapsible-arrow">▼</span>
+            </button>
+            <div id="debug-content" class="debug-content">
+                <p id="debug-vacancies-note"></p>
+                <a id="debug-vacancies-url" href="#" target="_blank" rel="noopener"></a>
+                <p id="debug-resumes-note"></p>
+                <a id="debug-resumes-url" href="#" target="_blank" rel="noopener"></a>
+            </div>
+        </div>
+
         <div class="result-actions">
+            <button type="button" id="copy-link-btn" class="btn btn-secondary">Скопировать ссылку</button>
             <a id="trends-link" href="/trends" class="btn btn-secondary">Посмотреть тренды</a>
+            <a href="/auth/login" class="btn btn-secondary">Авторизация HH</a>
         </div>
     </div>
 
@@ -530,5 +535,8 @@
 {% endblock %}
 
 {% block extra_js %}
+<script>
+    window.HH_PREFILL = {{ prefill|tojson }};
+</script>
 <script src="/static/script.js"></script>
 {% endblock %}

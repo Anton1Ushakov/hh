@@ -84,6 +84,7 @@ class UserQuery(Base):
     resume_job_search_status = Column(String, nullable=True)  # active_search, looking_for_offers, etc
     resume_label = Column(String, nullable=True)
     resume_period = Column(Integer, nullable=True)
+    query_signature = Column(String, nullable=True, index=True)
     
     # Results
     vacancies_count = Column(Integer, nullable=True)
@@ -121,6 +122,33 @@ def get_db():
         db.close()
 
 
+def ensure_database_dir() -> None:
+    """Create parent directory for SQLite file paths (e.g. /data on Render)."""
+    if not DATABASE_URL.startswith("sqlite:///"):
+        return
+    db_path = DATABASE_URL.replace("sqlite:///", "", 1)
+    if db_path in (":memory:", "") or db_path.startswith("?"):
+        return
+    parent = os.path.dirname(db_path)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
+
+
+def _migrate_schema() -> None:
+    """Lightweight SQLite migrations for existing databases."""
+    from sqlalchemy import inspect, text
+
+    inspector = inspect(engine)
+    if not inspector.has_table("user_queries"):
+        return
+    columns = {column["name"] for column in inspector.get_columns("user_queries")}
+    if "query_signature" not in columns:
+        with engine.begin() as conn:
+            conn.execute(text("ALTER TABLE user_queries ADD COLUMN query_signature VARCHAR"))
+
+
 def init_db():
     """Initialize database - create all tables"""
+    ensure_database_dir()
     Base.metadata.create_all(bind=engine)
+    _migrate_schema()

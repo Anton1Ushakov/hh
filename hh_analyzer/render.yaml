@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: hh-analyzer
+    runtime: docker
+    plan: free
+    rootDir: hh_analyzer
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./hh_analyzer.db
+      - key: DEBUG
+        value: "False"
+      - key: HH_USER_AGENT
+        sync: false
+      - key: HH_CLIENT_ID
+        sync: false
+      - key: HH_CLIENT_SECRET
+        sync: false
+      - key: HH_REFRESH_TOKEN
+        sync: false
+      - key: HH_ACCESS_TOKEN
+        sync: false
+      - key: HH_REDIRECT_URI
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+
+# Optional: paid plan — persistent SQLite on disk (uncomment disk + set DATABASE_URL=sqlite:////data/hh_analyzer.db)
+#    disk:
+#      name: hh-data
+#      mountPath: /data
+#      sizeGB: 1

@@ -51,12 +51,11 @@
 {% block extra_js %}
 {% if trends %}
 <script>
-    // Fetch trend data and render chart
     async function loadTrends() {
-        const query = "{{ query }}";
+        const signature = "{{ signature }}";
         
         try {
-            const response = await fetch(`/api/trends-data?query=${encodeURIComponent(query)}`);
+            const response = await fetch(`/api/trends-data?signature=${encodeURIComponent(signature)}`);
             const data = await response.json();
             
             const ctx = document.getElementById('trendsChart').getContext('2d');
