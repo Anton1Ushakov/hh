@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Тренды: {{ query }} - HH Analytics{% endblock %}
+
+{% block extra_css %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Тренды: "{{ query }}"</h1>
+    <p>Динамика вакансий и резюме за последние 30 дней</p>
+</div>
+
+<div class="trends-container">
+    {% if trends %}
+    <div class="chart-wrapper">
+        <canvas id="trendsChart"></canvas>
+    </div>
+    
+    <div class="trends-summary">
+        <h3>Сводка</h3>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <span class="summary-label">Среднее вакансий:</span>
+                <span class="summary-value">{{ "%.0f"|format(trends|map(attribute='avg_vacancies')|sum / trends|length) }}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Среднее резюме:</span>
+                <span class="summary-value">{{ "%.0f"|format(trends|map(attribute='avg_resumes')|sum / trends|length) }}</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Всего запросов:</span>
+                <span class="summary-value">{{ trends|map(attribute='request_count')|sum }}</span>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>Недостаточно данных для построения графика.</p>
+        <p><a href="/">Вернуться к калькулятору</a></p>
+    </div>
+    {% endif %}
+</div>
+
+<div class="back-link">
+    <a href="/stats" class="btn btn-secondary">← Назад к статистике</a>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if trends %}
+<script>
+    // Fetch trend data and render chart
+    async function loadTrends() {
+        const query = "{{ query }}";
+        
+        try {
+            const response = await fetch(`/api/trends-data?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            
+            const ctx = document.getElementById('trendsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels.map(date => {
+                        const d = new Date(date);
+                        return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+                    }),
+                    datasets: [
+                        {
+                            label: 'Вакансии',
+                            data: data.vacancies,
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Резюме',
+                            data: data.resumes,
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Динамика рынка труда'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString('ru-RU');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error loading trends:', error);
+        }
+    }
+    
+    loadTrends();
+</script>
+{% endif %}
+{% endblock %}
