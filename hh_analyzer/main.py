@@ -1,5 +1,5 @@
 """
-Main FastAPI application for HH.ru Analytics
+Main FastAPI application for labor market analytics
 """
 
 from fastapi import FastAPI, Request, Depends, Form, Query
@@ -19,12 +19,16 @@ from database import init_db, get_db, UserQuery, AggregatedStats, CachedDictiona
 from hh_api import HHAPIClient, TokenManager, get_auth_url, exchange_code_for_token
 from query_utils import build_query_signature, collect_filter_snapshot, upsert_aggregated_stats
 from dict_service import ensure_dictionaries, refresh_all_dictionaries, cache_dict
+from it_roles_catalog import build_grouped_catalog, load_it_dictionary
+from skills_catalog import load_skills_map
+from skills_map_data import export_skills_map_json
+from vacancy_insights import collect_vacancy_insights
 
 # Load environment variables
 load_dotenv()
 
 # Initialize FastAPI app
-app = FastAPI(title="HH.ru Analytics", description="Labor market calculator")
+app = FastAPI(title="Аналитика рынка труда", description="Labor market calculator")
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -80,6 +84,7 @@ async def health():
 async def index(request: Request, db: Session = Depends(get_db)):
     """Main page with search form"""
     areas = get_cached_dict(db, "areas") or []
+    area_names = {str(a.get("id")): a.get("name", "") for a in areas if a.get("id") is not None}
     roles = get_cached_dict(db, "professional_roles") or []
     experiences = get_cached_dict(db, "experiences") or []
     educations = get_cached_dict(db, "educations") or []
@@ -119,6 +124,7 @@ async def stats_page(request: Request, db: Session = Depends(get_db)):
     
     return templates.TemplateResponse("stats.html", {
         "request": request,
+        "area_names": area_names,
         "queries": [
             {
                 "record": q,
@@ -127,6 +133,60 @@ async def stats_page(request: Request, db: Session = Depends(get_db)):
             for q in top_queries
         ],
     })
+
+
+@app.get("/dictionary", response_class=HTMLResponse)
+async def dictionary_page(request: Request):
+    """IT roles and vacancy titles dictionary with grouped accordion."""
+    try:
+        raw = load_it_dictionary()
+        catalog = build_grouped_catalog(raw)
+    except FileNotFoundError:
+        return templates.TemplateResponse(
+            "dictionary.html",
+            {
+                "request": request,
+                "catalog": None,
+                "error": "Словарь не найден. Запустите scripts/collect_it_vacancy_titles.py",
+            },
+        )
+
+    return templates.TemplateResponse(
+        "dictionary.html",
+        {
+            "request": request,
+            "catalog": catalog,
+            "error": None,
+        },
+    )
+
+
+@app.get("/api/it-dictionary")
+async def it_dictionary_api():
+    """Grouped IT dictionary as JSON."""
+    try:
+        raw = load_it_dictionary()
+        return build_grouped_catalog(raw)
+    except FileNotFoundError as e:
+        return JSONResponse({"error": str(e)}, status_code=404)
+
+
+@app.get("/api/skills-map")
+async def skills_map_api():
+    """Canonical skills map: name -> aliases."""
+    export_skills_map_json()
+    return load_skills_map()
+
+
+@app.get("/api/it-skills")
+async def it_skills_api():
+    """Collected canonical skill counts by IT role."""
+    from it_roles_catalog import load_skills_counts
+
+    data = load_skills_counts()
+    if not data:
+        return JSONResponse({"error": "Run scripts/collect_it_skills.py"}, status_code=404)
+    return data
 
 
 @app.get("/trends", response_class=HTMLResponse)
@@ -211,6 +271,11 @@ async def calculate(
         search_in_company_name_bool = False
         search_in_description_bool = False
         resume_period_int = int(resume_period) if resume_period else None
+
+        if vacancy_experience and not resume_experience:
+            resume_experience = vacancy_experience
+        elif resume_experience and not vacancy_experience:
+            vacancy_experience = resume_experience
 
         filter_snapshot = collect_filter_snapshot(
             text=text,
@@ -305,6 +370,37 @@ async def calculate(
 
         vacancies_count = vacancy_result["found"]
         resumes_count = resume_result["found"]
+
+        vacancy_insights = {"salary": {"display": None}, "top_skills": []}
+        if vacancies_count > 0:
+            try:
+                vacancy_insights = collect_vacancy_insights(
+                    hh_client,
+                    text=text,
+                    area=area,
+                    professional_role=professional_role,
+                    search_everywhere=False,
+                    search_in_name=search_in_name_bool,
+                    search_in_company_name=search_in_company_name_bool,
+                    search_in_description=search_in_description_bool,
+                    employment_form=vacancy_employment_form,
+                    work_schedule_by_days=vacancy_work_schedule_by_days,
+                    work_format=vacancy_work_format,
+                    working_hours=vacancy_working_hours,
+                    experience=vacancy_experience,
+                    education=vacancy_education,
+                    salary=vacancy_salary,
+                    currency=vacancy_currency,
+                    salary_frequency=vacancy_salary_frequency,
+                    salary_mode=vacancy_salary_mode,
+                    industry=vacancy_industry,
+                    label=vacancy_label,
+                    type_=vacancy_type,
+                    period=vacancy_period,
+                )
+            except Exception as insight_error:
+                print(f"Vacancy insights error: {insight_error}")
+
         resume_field = resume_result["params"].get("text.field", "title")
         resume_period_label = (
             f"обновлялись за {resume_period_int} дн."
@@ -373,6 +469,7 @@ async def calculate(
             "difference": vacancies_count - resumes_count,
             "timestamp": datetime.utcnow().isoformat(),
             "query_signature": query_signature,
+            "insights": vacancy_insights,
             "debug": {
                 "vacancies": {
                     "url": vacancy_result["url"],

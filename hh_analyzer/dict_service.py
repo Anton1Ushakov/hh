@@ -54,6 +54,6 @@ def ensure_dictionaries(db: Session, client: HHAPIClient) -> None:
     )
     if cached:
         return
-    print("Dictionary cache empty — fetching from HH.ru API...")
+    print("Dictionary cache empty — fetching from API...")
     refresh_all_dictionaries(db, client)
     print("Dictionaries cached.")

@@ -1,0 +1,6209 @@
+{
+  "period_days": 14,
+  "skills_map_path": "data/skills_map.json",
+  "by_role": {
+    "156": {
+      "role_id": "156",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 79,
+      "skills": [
+        {
+          "name": "SQL",
+          "count": 47
+        },
+        {
+          "name": "Excel",
+          "count": 31
+        },
+        {
+          "name": "Power BI",
+          "count": 18
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 15
+        },
+        {
+          "name": "Python",
+          "count": 13
+        },
+        {
+          "name": "Data Analysis",
+          "count": 9
+        },
+        {
+          "name": "Oracle DB",
+          "count": 9
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 9
+        },
+        {
+          "name": "ETL",
+          "count": 8
+        },
+        {
+          "name": "DWH",
+          "count": 8
+        },
+        {
+          "name": "Hadoop",
+          "count": 6
+        },
+        {
+          "name": "Git",
+          "count": 6
+        },
+        {
+          "name": "Tableau",
+          "count": 6
+        },
+        {
+          "name": "Apache Spark",
+          "count": 5
+        },
+        {
+          "name": "Airflow",
+          "count": 4
+        },
+        {
+          "name": "ClickHouse",
+          "count": 4
+        },
+        {
+          "name": "REST API",
+          "count": 4
+        },
+        {
+          "name": "CRM",
+          "count": 4
+        },
+        {
+          "name": "1С",
+          "count": 4
+        },
+        {
+          "name": "Business Analysis",
+          "count": 4
+        },
+        {
+          "name": "Confluence",
+          "count": 3
+        },
+        {
+          "name": "Apache",
+          "count": 3
+        },
+        {
+          "name": "Scala",
+          "count": 3
+        },
+        {
+          "name": "Jira",
+          "count": 3
+        },
+        {
+          "name": "Statistics",
+          "count": 3
+        },
+        {
+          "name": "UI/UX",
+          "count": 3
+        },
+        {
+          "name": "Google Sheets",
+          "count": 3
+        },
+        {
+          "name": "Hive",
+          "count": 2
+        },
+        {
+          "name": "Pandas",
+          "count": 2
+        },
+        {
+          "name": "Snowflake",
+          "count": 2
+        },
+        {
+          "name": "Kafka",
+          "count": 2
+        },
+        {
+          "name": "System Analysis",
+          "count": 2
+        },
+        {
+          "name": "LLM",
+          "count": 2
+        },
+        {
+          "name": "JSON",
+          "count": 2
+        },
+        {
+          "name": "dbt",
+          "count": 2
+        },
+        {
+          "name": "Machine Learning",
+          "count": 2
+        },
+        {
+          "name": "ERP",
+          "count": 2
+        },
+        {
+          "name": "MySQL",
+          "count": 2
+        },
+        {
+          "name": "NumPy",
+          "count": 1
+        },
+        {
+          "name": "SciPy",
+          "count": 1
+        },
+        {
+          "name": "Jenkins",
+          "count": 1
+        },
+        {
+          "name": "C#",
+          "count": 1
+        },
+        {
+          "name": "Docker",
+          "count": 1
+        },
+        {
+          "name": "ITIL",
+          "count": 1
+        },
+        {
+          "name": "BPMN",
+          "count": 1
+        },
+        {
+          "name": "QA",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Agile",
+          "count": 1
+        },
+        {
+          "name": "Miro",
+          "count": 1
+        },
+        {
+          "name": "SIEM",
+          "count": 1
+        },
+        {
+          "name": "Apache Superset",
+          "count": 1
+        },
+        {
+          "name": "Bitrix",
+          "count": 1
+        },
+        {
+          "name": "SAP",
+          "count": 1
+        },
+        {
+          "name": "XML",
+          "count": 1
+        },
+        {
+          "name": "Mocha",
+          "count": 1
+        },
+        {
+          "name": "Java",
+          "count": 1
+        },
+        {
+          "name": "Shell",
+          "count": 1
+        }
+      ],
+      "role_name": "BI-аналитик, аналитик данных"
+    },
+    "160": {
+      "role_id": "160",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 95,
+      "skills": [
+        {
+          "name": "DevOps",
+          "count": 70
+        },
+        {
+          "name": "Linux",
+          "count": 45
+        },
+        {
+          "name": "Kubernetes",
+          "count": 33
+        },
+        {
+          "name": "CI/CD",
+          "count": 32
+        },
+        {
+          "name": "Docker",
+          "count": 30
+        },
+        {
+          "name": "Git",
+          "count": 30
+        },
+        {
+          "name": "Ansible",
+          "count": 20
+        },
+        {
+          "name": "Networking",
+          "count": 19
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 18
+        },
+        {
+          "name": "Python",
+          "count": 15
+        },
+        {
+          "name": "Grafana",
+          "count": 15
+        },
+        {
+          "name": "GitLab CI",
+          "count": 15
+        },
+        {
+          "name": "Jenkins",
+          "count": 14
+        },
+        {
+          "name": "Kafka",
+          "count": 12
+        },
+        {
+          "name": "Nginx",
+          "count": 12
+        },
+        {
+          "name": "ClickHouse",
+          "count": 11
+        },
+        {
+          "name": "Prometheus",
+          "count": 11
+        },
+        {
+          "name": "Shell",
+          "count": 10
+        },
+        {
+          "name": "Zabbix",
+          "count": 10
+        },
+        {
+          "name": "Terraform",
+          "count": 9
+        },
+        {
+          "name": "SQL",
+          "count": 9
+        },
+        {
+          "name": "Microservices",
+          "count": 8
+        },
+        {
+          "name": "QA",
+          "count": 8
+        },
+        {
+          "name": "Redis",
+          "count": 8
+        },
+        {
+          "name": "ELK",
+          "count": 5
+        },
+        {
+          "name": "MySQL",
+          "count": 5
+        },
+        {
+          "name": "Apache",
+          "count": 5
+        },
+        {
+          "name": "Windows Server",
+          "count": 5
+        },
+        {
+          "name": "Airflow",
+          "count": 4
+        },
+        {
+          "name": "Machine Learning",
+          "count": 4
+        },
+        {
+          "name": "AWS",
+          "count": 4
+        },
+        {
+          "name": "Elasticsearch",
+          "count": 4
+        },
+        {
+          "name": "NoSQL",
+          "count": 4
+        },
+        {
+          "name": "MongoDB",
+          "count": 4
+        },
+        {
+          "name": "RabbitMQ",
+          "count": 4
+        },
+        {
+          "name": "Jira",
+          "count": 4
+        },
+        {
+          "name": "REST API",
+          "count": 4
+        },
+        {
+          "name": "Java",
+          "count": 4
+        },
+        {
+          "name": "VMware",
+          "count": 4
+        },
+        {
+          "name": "LLM",
+          "count": 4
+        },
+        {
+          "name": "Go",
+          "count": 3
+        },
+        {
+          "name": "Yandex Cloud",
+          "count": 3
+        },
+        {
+          "name": "MLOps",
+          "count": 3
+        },
+        {
+          "name": "GitHub Actions",
+          "count": 3
+        },
+        {
+          "name": "Firewall",
+          "count": 3
+        },
+        {
+          "name": "Agile",
+          "count": 3
+        },
+        {
+          "name": "Information Security",
+          "count": 3
+        },
+        {
+          "name": "gRPC",
+          "count": 2
+        },
+        {
+          "name": "ERP",
+          "count": 2
+        },
+        {
+          "name": "Azure",
+          "count": 2
+        },
+        {
+          "name": "GCP",
+          "count": 2
+        },
+        {
+          "name": "CSS",
+          "count": 2
+        },
+        {
+          "name": "iOS",
+          "count": 2
+        },
+        {
+          "name": "ITIL",
+          "count": 2
+        },
+        {
+          "name": "Oracle DB",
+          "count": 2
+        },
+        {
+          "name": "C++",
+          "count": 1
+        },
+        {
+          "name": "dbt",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "Apache Spark",
+          "count": 1
+        },
+        {
+          "name": "Logstash",
+          "count": 1
+        },
+        {
+          "name": "LDAP",
+          "count": 1
+        },
+        {
+          "name": "Rust",
+          "count": 1
+        },
+        {
+          "name": "JavaScript",
+          "count": 1
+        },
+        {
+          "name": "HTML",
+          "count": 1
+        },
+        {
+          "name": "Scala",
+          "count": 1
+        },
+        {
+          "name": "TypeScript",
+          "count": 1
+        },
+        {
+          "name": "Kotlin",
+          "count": 1
+        },
+        {
+          "name": "DWH",
+          "count": 1
+        },
+        {
+          "name": "Excel",
+          "count": 1
+        },
+        {
+          "name": "Webpack",
+          "count": 1
+        },
+        {
+          "name": "SIEM",
+          "count": 1
+        },
+        {
+          "name": "Hadoop",
+          "count": 1
+        },
+        {
+          "name": "SEO",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Embedded",
+          "count": 1
+        },
+        {
+          "name": "IoT",
+          "count": 1
+        }
+      ],
+      "role_name": "DevOps-инженер"
+    },
+    "10": {
+      "role_id": "10",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 58,
+      "skills": [
+        {
+          "name": "SQL",
+          "count": 17
+        },
+        {
+          "name": "Excel",
+          "count": 17
+        },
+        {
+          "name": "ERP",
+          "count": 17
+        },
+        {
+          "name": "Python",
+          "count": 9
+        },
+        {
+          "name": "QA",
+          "count": 8
+        },
+        {
+          "name": "1С",
+          "count": 8
+        },
+        {
+          "name": "Data Analysis",
+          "count": 7
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 5
+        },
+        {
+          "name": "Git",
+          "count": 4
+        },
+        {
+          "name": "Business Analysis",
+          "count": 4
+        },
+        {
+          "name": "Project Management",
+          "count": 4
+        },
+        {
+          "name": "System Analysis",
+          "count": 4
+        },
+        {
+          "name": "Networking",
+          "count": 3
+        },
+        {
+          "name": "Pandas",
+          "count": 3
+        },
+        {
+          "name": "ClickHouse",
+          "count": 3
+        },
+        {
+          "name": "BPMN",
+          "count": 3
+        },
+        {
+          "name": "Apache Superset",
+          "count": 2
+        },
+        {
+          "name": "Deep Learning",
+          "count": 2
+        },
+        {
+          "name": "Machine Learning",
+          "count": 2
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 2
+        },
+        {
+          "name": "Agile",
+          "count": 2
+        },
+        {
+          "name": "Bitrix",
+          "count": 2
+        },
+        {
+          "name": "Power BI",
+          "count": 2
+        },
+        {
+          "name": "Miro",
+          "count": 2
+        },
+        {
+          "name": "CRM",
+          "count": 2
+        },
+        {
+          "name": "Statistics",
+          "count": 2
+        },
+        {
+          "name": "SAP",
+          "count": 2
+        },
+        {
+          "name": "Grafana",
+          "count": 1
+        },
+        {
+          "name": "SciPy",
+          "count": 1
+        },
+        {
+          "name": "Technical Support",
+          "count": 1
+        },
+        {
+          "name": "Unity",
+          "count": 1
+        },
+        {
+          "name": "A/B Testing",
+          "count": 1
+        },
+        {
+          "name": "LLM",
+          "count": 1
+        },
+        {
+          "name": "R",
+          "count": 1
+        },
+        {
+          "name": "Shell",
+          "count": 1
+        },
+        {
+          "name": "C#",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "Hadoop",
+          "count": 1
+        },
+        {
+          "name": "Apache Spark",
+          "count": 1
+        },
+        {
+          "name": "TensorFlow",
+          "count": 1
+        },
+        {
+          "name": "Docker",
+          "count": 1
+        },
+        {
+          "name": "MLOps",
+          "count": 1
+        },
+        {
+          "name": "PyTorch",
+          "count": 1
+        },
+        {
+          "name": "REST API",
+          "count": 1
+        },
+        {
+          "name": "Technical Writing",
+          "count": 1
+        },
+        {
+          "name": "Swagger",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "Tableau",
+          "count": 1
+        },
+        {
+          "name": "NumPy",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "OLAP",
+          "count": 1
+        },
+        {
+          "name": "WMS",
+          "count": 1
+        },
+        {
+          "name": "Google Sheets",
+          "count": 1
+        },
+        {
+          "name": "SEO",
+          "count": 1
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        }
+      ],
+      "role_name": "Аналитик"
+    },
+    "12": {
+      "role_id": "12",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 28,
+      "skills": [
+        {
+          "name": "Git",
+          "count": 12
+        },
+        {
+          "name": "Adobe Photoshop",
+          "count": 11
+        },
+        {
+          "name": "Adobe Illustrator",
+          "count": 7
+        },
+        {
+          "name": "Deep Learning",
+          "count": 5
+        },
+        {
+          "name": "Figma",
+          "count": 5
+        },
+        {
+          "name": "Networking",
+          "count": 5
+        },
+        {
+          "name": "QA",
+          "count": 2
+        },
+        {
+          "name": "R",
+          "count": 1
+        },
+        {
+          "name": "Sketch",
+          "count": 1
+        },
+        {
+          "name": "A/B Testing",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Game Development",
+          "count": 1
+        },
+        {
+          "name": "UI/UX",
+          "count": 1
+        }
+      ],
+      "role_name": "Арт-директор, креативный директор"
+    },
+    "150": {
+      "role_id": "150",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 63,
+      "skills": [
+        {
+          "name": "BPMN",
+          "count": 19
+        },
+        {
+          "name": "Business Analysis",
+          "count": 18
+        },
+        {
+          "name": "Excel",
+          "count": 15
+        },
+        {
+          "name": "SQL",
+          "count": 10
+        },
+        {
+          "name": "ERP",
+          "count": 10
+        },
+        {
+          "name": "Data Analysis",
+          "count": 8
+        },
+        {
+          "name": "CRM",
+          "count": 8
+        },
+        {
+          "name": "1С",
+          "count": 5
+        },
+        {
+          "name": "Bitrix",
+          "count": 5
+        },
+        {
+          "name": "Jira",
+          "count": 4
+        },
+        {
+          "name": "QA",
+          "count": 4
+        },
+        {
+          "name": "Power BI",
+          "count": 3
+        },
+        {
+          "name": "Networking",
+          "count": 3
+        },
+        {
+          "name": "Project Management",
+          "count": 3
+        },
+        {
+          "name": "Figma",
+          "count": 3
+        },
+        {
+          "name": "Confluence",
+          "count": 3
+        },
+        {
+          "name": "Python",
+          "count": 2
+        },
+        {
+          "name": "LLM",
+          "count": 2
+        },
+        {
+          "name": "Agile",
+          "count": 2
+        },
+        {
+          "name": "System Analysis",
+          "count": 2
+        },
+        {
+          "name": "Microservices",
+          "count": 2
+        },
+        {
+          "name": "Miro",
+          "count": 2
+        },
+        {
+          "name": "WMS",
+          "count": 2
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 2
+        },
+        {
+          "name": "SAP",
+          "count": 2
+        },
+        {
+          "name": "Tableau",
+          "count": 1
+        },
+        {
+          "name": "Pandas",
+          "count": 1
+        },
+        {
+          "name": "NumPy",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "Deep Learning",
+          "count": 1
+        },
+        {
+          "name": "REST API",
+          "count": 1
+        },
+        {
+          "name": "JSON",
+          "count": 1
+        },
+        {
+          "name": "XML",
+          "count": 1
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "Hadoop",
+          "count": 1
+        },
+        {
+          "name": "Apache Superset",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "Machine Learning",
+          "count": 1
+        },
+        {
+          "name": "Lua",
+          "count": 1
+        },
+        {
+          "name": "Statistics",
+          "count": 1
+        },
+        {
+          "name": "Google Sheets",
+          "count": 1
+        },
+        {
+          "name": "Notion",
+          "count": 1
+        }
+      ],
+      "role_name": "Бизнес-аналитик"
+    },
+    "25": {
+      "role_id": "25",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 77,
+      "skills": [
+        {
+          "name": "Game Development",
+          "count": 46
+        },
+        {
+          "name": "Unity",
+          "count": 24
+        },
+        {
+          "name": "Unreal Engine",
+          "count": 11
+        },
+        {
+          "name": "C#",
+          "count": 8
+        },
+        {
+          "name": "Deep Learning",
+          "count": 6
+        },
+        {
+          "name": "iOS",
+          "count": 5
+        },
+        {
+          "name": "Figma",
+          "count": 5
+        },
+        {
+          "name": "Excel",
+          "count": 5
+        },
+        {
+          "name": "Git",
+          "count": 4
+        },
+        {
+          "name": "Android",
+          "count": 4
+        },
+        {
+          "name": "Python",
+          "count": 4
+        },
+        {
+          "name": "Agile",
+          "count": 4
+        },
+        {
+          "name": "Machine Learning",
+          "count": 4
+        },
+        {
+          "name": "Product Management",
+          "count": 4
+        },
+        {
+          "name": "C++",
+          "count": 3
+        },
+        {
+          "name": "UI/UX",
+          "count": 3
+        },
+        {
+          "name": "REST API",
+          "count": 3
+        },
+        {
+          "name": "System Design",
+          "count": 3
+        },
+        {
+          "name": "Adobe Photoshop",
+          "count": 3
+        },
+        {
+          "name": "QA",
+          "count": 2
+        },
+        {
+          "name": "Miro",
+          "count": 2
+        },
+        {
+          "name": "Google Sheets",
+          "count": 2
+        },
+        {
+          "name": "LLM",
+          "count": 2
+        },
+        {
+          "name": "SEO",
+          "count": 1
+        },
+        {
+          "name": "CI/CD",
+          "count": 1
+        },
+        {
+          "name": "R",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Notion",
+          "count": 1
+        },
+        {
+          "name": "Airflow",
+          "count": 1
+        },
+        {
+          "name": "Pandas",
+          "count": 1
+        },
+        {
+          "name": "NumPy",
+          "count": 1
+        },
+        {
+          "name": "Grafana",
+          "count": 1
+        },
+        {
+          "name": "SciPy",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "Technical Support",
+          "count": 1
+        },
+        {
+          "name": "Computer Vision",
+          "count": 1
+        },
+        {
+          "name": "BPMN",
+          "count": 1
+        },
+        {
+          "name": "Go",
+          "count": 1
+        },
+        {
+          "name": "Networking",
+          "count": 1
+        },
+        {
+          "name": "Kotlin",
+          "count": 1
+        },
+        {
+          "name": "System Analysis",
+          "count": 1
+        },
+        {
+          "name": "Swift",
+          "count": 1
+        },
+        {
+          "name": "Statistics",
+          "count": 1
+        },
+        {
+          "name": "CRM",
+          "count": 1
+        },
+        {
+          "name": "Storybook",
+          "count": 1
+        },
+        {
+          "name": "CSS",
+          "count": 1
+        },
+        {
+          "name": "HTML",
+          "count": 1
+        }
+      ],
+      "role_name": "Гейм-дизайнер"
+    },
+    "165": {
+      "role_id": "165",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 93,
+      "skills": [
+        {
+          "name": "Machine Learning",
+          "count": 47
+        },
+        {
+          "name": "Python",
+          "count": 42
+        },
+        {
+          "name": "SQL",
+          "count": 35
+        },
+        {
+          "name": "LLM",
+          "count": 22
+        },
+        {
+          "name": "PyTorch",
+          "count": 15
+        },
+        {
+          "name": "NLP",
+          "count": 14
+        },
+        {
+          "name": "Pandas",
+          "count": 11
+        },
+        {
+          "name": "Airflow",
+          "count": 10
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 9
+        },
+        {
+          "name": "Apache",
+          "count": 9
+        },
+        {
+          "name": "Git",
+          "count": 9
+        },
+        {
+          "name": "ETL",
+          "count": 9
+        },
+        {
+          "name": "Deep Learning",
+          "count": 8
+        },
+        {
+          "name": "ClickHouse",
+          "count": 8
+        },
+        {
+          "name": "Apache Spark",
+          "count": 7
+        },
+        {
+          "name": "NumPy",
+          "count": 7
+        },
+        {
+          "name": "Docker",
+          "count": 7
+        },
+        {
+          "name": "QA",
+          "count": 7
+        },
+        {
+          "name": "DWH",
+          "count": 7
+        },
+        {
+          "name": "Kubernetes",
+          "count": 6
+        },
+        {
+          "name": "Computer Vision",
+          "count": 6
+        },
+        {
+          "name": "Data Analysis",
+          "count": 6
+        },
+        {
+          "name": "MLOps",
+          "count": 5
+        },
+        {
+          "name": "Kafka",
+          "count": 5
+        },
+        {
+          "name": "R",
+          "count": 5
+        },
+        {
+          "name": "CI/CD",
+          "count": 5
+        },
+        {
+          "name": "TensorFlow",
+          "count": 5
+        },
+        {
+          "name": "Linux",
+          "count": 5
+        },
+        {
+          "name": "Networking",
+          "count": 5
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 5
+        },
+        {
+          "name": "Shell",
+          "count": 4
+        },
+        {
+          "name": "A/B Testing",
+          "count": 4
+        },
+        {
+          "name": "FastAPI",
+          "count": 3
+        },
+        {
+          "name": "Mocha",
+          "count": 3
+        },
+        {
+          "name": "AWS",
+          "count": 3
+        },
+        {
+          "name": "Hadoop",
+          "count": 3
+        },
+        {
+          "name": "Azure",
+          "count": 3
+        },
+        {
+          "name": "GCP",
+          "count": 3
+        },
+        {
+          "name": "Excel",
+          "count": 3
+        },
+        {
+          "name": "C++",
+          "count": 3
+        },
+        {
+          "name": "NoSQL",
+          "count": 2
+        },
+        {
+          "name": "Go",
+          "count": 2
+        },
+        {
+          "name": "Statistics",
+          "count": 2
+        },
+        {
+          "name": "REST API",
+          "count": 2
+        },
+        {
+          "name": "Microservices",
+          "count": 2
+        },
+        {
+          "name": "SciPy",
+          "count": 2
+        },
+        {
+          "name": "Apache Superset",
+          "count": 2
+        },
+        {
+          "name": "Tableau",
+          "count": 2
+        },
+        {
+          "name": "Power BI",
+          "count": 2
+        },
+        {
+          "name": "Grafana",
+          "count": 2
+        },
+        {
+          "name": "Prometheus",
+          "count": 2
+        },
+        {
+          "name": "Windows Server",
+          "count": 2
+        },
+        {
+          "name": "Oracle DB",
+          "count": 2
+        },
+        {
+          "name": "Ansible",
+          "count": 2
+        },
+        {
+          "name": "Blockchain",
+          "count": 1
+        },
+        {
+          "name": "Flask",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "Redis",
+          "count": 1
+        },
+        {
+          "name": "Unity",
+          "count": 1
+        },
+        {
+          "name": "Scala",
+          "count": 1
+        },
+        {
+          "name": "DevOps",
+          "count": 1
+        },
+        {
+          "name": "System Design",
+          "count": 1
+        },
+        {
+          "name": "Lua",
+          "count": 1
+        },
+        {
+          "name": "React",
+          "count": 1
+        },
+        {
+          "name": "gRPC",
+          "count": 1
+        },
+        {
+          "name": "dbt",
+          "count": 1
+        },
+        {
+          "name": "Elasticsearch",
+          "count": 1
+        },
+        {
+          "name": "Nginx",
+          "count": 1
+        },
+        {
+          "name": "1С",
+          "count": 1
+        },
+        {
+          "name": "MATLAB",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "OLAP",
+          "count": 1
+        },
+        {
+          "name": "CRM",
+          "count": 1
+        },
+        {
+          "name": "Java",
+          "count": 1
+        },
+        {
+          "name": "Android",
+          "count": 1
+        },
+        {
+          "name": "GitLab CI",
+          "count": 1
+        },
+        {
+          "name": "Terraform",
+          "count": 1
+        },
+        {
+          "name": "MySQL",
+          "count": 1
+        }
+      ],
+      "role_name": "Дата-сайентист"
+    },
+    "34": {
+      "role_id": "34",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 52,
+      "skills": [
+        {
+          "name": "Adobe Photoshop",
+          "count": 29
+        },
+        {
+          "name": "Figma",
+          "count": 19
+        },
+        {
+          "name": "Adobe Illustrator",
+          "count": 19
+        },
+        {
+          "name": "UI/UX",
+          "count": 11
+        },
+        {
+          "name": "Git",
+          "count": 5
+        },
+        {
+          "name": "Deep Learning",
+          "count": 4
+        },
+        {
+          "name": "Excel",
+          "count": 3
+        },
+        {
+          "name": "CRM",
+          "count": 2
+        },
+        {
+          "name": "Networking",
+          "count": 2
+        },
+        {
+          "name": "Sketch",
+          "count": 2
+        },
+        {
+          "name": "CSS",
+          "count": 2
+        },
+        {
+          "name": "Unreal Engine",
+          "count": 2
+        },
+        {
+          "name": "Android",
+          "count": 2
+        },
+        {
+          "name": "iOS",
+          "count": 2
+        },
+        {
+          "name": "SEO",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Blockchain",
+          "count": 1
+        },
+        {
+          "name": "QA",
+          "count": 1
+        },
+        {
+          "name": "Bitrix",
+          "count": 1
+        },
+        {
+          "name": "Game Development",
+          "count": 1
+        },
+        {
+          "name": "LLM",
+          "count": 1
+        }
+      ],
+      "role_name": "Дизайнер, художник"
+    },
+    "36": {
+      "role_id": "36",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 46,
+      "skills": [
+        {
+          "name": "Networking",
+          "count": 11
+        },
+        {
+          "name": "Linux",
+          "count": 10
+        },
+        {
+          "name": "ERP",
+          "count": 10
+        },
+        {
+          "name": "Project Management",
+          "count": 7
+        },
+        {
+          "name": "Information Security",
+          "count": 7
+        },
+        {
+          "name": "Windows Server",
+          "count": 6
+        },
+        {
+          "name": "1С",
+          "count": 6
+        },
+        {
+          "name": "Bitrix",
+          "count": 6
+        },
+        {
+          "name": "DevOps",
+          "count": 6
+        },
+        {
+          "name": "CRM",
+          "count": 5
+        },
+        {
+          "name": "SQL",
+          "count": 5
+        },
+        {
+          "name": "VMware",
+          "count": 5
+        },
+        {
+          "name": "Shell",
+          "count": 4
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 4
+        },
+        {
+          "name": "Agile",
+          "count": 4
+        },
+        {
+          "name": "Firewall",
+          "count": 4
+        },
+        {
+          "name": "ITIL",
+          "count": 4
+        },
+        {
+          "name": "Python",
+          "count": 3
+        },
+        {
+          "name": "LLM",
+          "count": 3
+        },
+        {
+          "name": "Oracle DB",
+          "count": 3
+        },
+        {
+          "name": "CI/CD",
+          "count": 3
+        },
+        {
+          "name": "COBIT",
+          "count": 3
+        },
+        {
+          "name": "QA",
+          "count": 3
+        },
+        {
+          "name": "Technical Support",
+          "count": 2
+        },
+        {
+          "name": "WMS",
+          "count": 2
+        },
+        {
+          "name": "SAP",
+          "count": 2
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 2
+        },
+        {
+          "name": "JavaScript",
+          "count": 2
+        },
+        {
+          "name": "LDAP",
+          "count": 2
+        },
+        {
+          "name": "ISO 27001",
+          "count": 2
+        },
+        {
+          "name": "SIEM",
+          "count": 2
+        },
+        {
+          "name": "Git",
+          "count": 2
+        },
+        {
+          "name": "Data Analysis",
+          "count": 1
+        },
+        {
+          "name": "Excel",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "Cisco",
+          "count": 1
+        },
+        {
+          "name": "Business Analysis",
+          "count": 1
+        },
+        {
+          "name": "Node.js",
+          "count": 1
+        },
+        {
+          "name": "IoT",
+          "count": 1
+        },
+        {
+          "name": "DWH",
+          "count": 1
+        },
+        {
+          "name": "C#",
+          "count": 1
+        },
+        {
+          "name": "Microservices",
+          "count": 1
+        },
+        {
+          "name": "PCI DSS",
+          "count": 1
+        },
+        {
+          "name": "Java",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "Power BI",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "Terraform",
+          "count": 1
+        },
+        {
+          "name": "OAuth",
+          "count": 1
+        },
+        {
+          "name": "Yandex Cloud",
+          "count": 1
+        }
+      ],
+      "role_name": "Директор по информационным технологиям (CIO)"
+    },
+    "73": {
+      "role_id": "73",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 56,
+      "skills": [
+        {
+          "name": "Product Management",
+          "count": 27
+        },
+        {
+          "name": "QA",
+          "count": 8
+        },
+        {
+          "name": "Agile",
+          "count": 7
+        },
+        {
+          "name": "Git",
+          "count": 7
+        },
+        {
+          "name": "Jira",
+          "count": 6
+        },
+        {
+          "name": "Excel",
+          "count": 5
+        },
+        {
+          "name": "Networking",
+          "count": 5
+        },
+        {
+          "name": "Project Management",
+          "count": 5
+        },
+        {
+          "name": "ERP",
+          "count": 5
+        },
+        {
+          "name": "CRM",
+          "count": 4
+        },
+        {
+          "name": "A/B Testing",
+          "count": 3
+        },
+        {
+          "name": "Confluence",
+          "count": 3
+        },
+        {
+          "name": "1С",
+          "count": 3
+        },
+        {
+          "name": "SQL",
+          "count": 3
+        },
+        {
+          "name": "Machine Learning",
+          "count": 2
+        },
+        {
+          "name": "Figma",
+          "count": 2
+        },
+        {
+          "name": "UI/UX",
+          "count": 2
+        },
+        {
+          "name": "CSS",
+          "count": 2
+        },
+        {
+          "name": "REST API",
+          "count": 2
+        },
+        {
+          "name": "BPMN",
+          "count": 2
+        },
+        {
+          "name": "IoT",
+          "count": 2
+        },
+        {
+          "name": "WMS",
+          "count": 2
+        },
+        {
+          "name": "iOS",
+          "count": 2
+        },
+        {
+          "name": "Python",
+          "count": 2
+        },
+        {
+          "name": "Bitrix",
+          "count": 1
+        },
+        {
+          "name": "Statistics",
+          "count": 1
+        },
+        {
+          "name": "Google Sheets",
+          "count": 1
+        },
+        {
+          "name": "VMware",
+          "count": 1
+        },
+        {
+          "name": "Linux",
+          "count": 1
+        },
+        {
+          "name": "OpenStack",
+          "count": 1
+        },
+        {
+          "name": "Swift",
+          "count": 1
+        },
+        {
+          "name": "Embedded",
+          "count": 1
+        },
+        {
+          "name": "Computer Vision",
+          "count": 1
+        },
+        {
+          "name": "Power BI",
+          "count": 1
+        },
+        {
+          "name": "DevOps",
+          "count": 1
+        },
+        {
+          "name": "TMS",
+          "count": 1
+        },
+        {
+          "name": "SOAP",
+          "count": 1
+        },
+        {
+          "name": "Go",
+          "count": 1
+        },
+        {
+          "name": "R",
+          "count": 1
+        },
+        {
+          "name": "Pandas",
+          "count": 1
+        },
+        {
+          "name": "Android",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "Rust",
+          "count": 1
+        },
+        {
+          "name": "Miro",
+          "count": 1
+        }
+      ],
+      "role_name": "Менеджер продукта"
+    },
+    "155": {
+      "role_id": "155",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 40,
+      "skills": [
+        {
+          "name": "ERP",
+          "count": 12
+        },
+        {
+          "name": "Bitrix",
+          "count": 12
+        },
+        {
+          "name": "CRM",
+          "count": 8
+        },
+        {
+          "name": "Excel",
+          "count": 5
+        },
+        {
+          "name": "QA",
+          "count": 5
+        },
+        {
+          "name": "REST API",
+          "count": 4
+        },
+        {
+          "name": "PHP",
+          "count": 4
+        },
+        {
+          "name": "1С",
+          "count": 4
+        },
+        {
+          "name": "SAP",
+          "count": 3
+        },
+        {
+          "name": "WMS",
+          "count": 2
+        },
+        {
+          "name": "Project Management",
+          "count": 2
+        },
+        {
+          "name": "Business Analysis",
+          "count": 2
+        },
+        {
+          "name": "MySQL",
+          "count": 2
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        },
+        {
+          "name": "BPMN",
+          "count": 1
+        },
+        {
+          "name": "Deep Learning",
+          "count": 1
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "Nginx",
+          "count": 1
+        },
+        {
+          "name": "Linux",
+          "count": 1
+        },
+        {
+          "name": "Git",
+          "count": 1
+        },
+        {
+          "name": "Docker",
+          "count": 1
+        },
+        {
+          "name": "Networking",
+          "count": 1
+        },
+        {
+          "name": "CSS",
+          "count": 1
+        },
+        {
+          "name": "Agile",
+          "count": 1
+        },
+        {
+          "name": "LLM",
+          "count": 1
+        },
+        {
+          "name": "SOAP",
+          "count": 1
+        },
+        {
+          "name": "Adobe Illustrator",
+          "count": 1
+        },
+        {
+          "name": "Adobe Photoshop",
+          "count": 1
+        }
+      ],
+      "role_name": "Методолог"
+    },
+    "96": {
+      "role_id": "96",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 86,
+      "skills": [
+        {
+          "name": "JavaScript",
+          "count": 18
+        },
+        {
+          "name": "Java",
+          "count": 18
+        },
+        {
+          "name": "Python",
+          "count": 17
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 14
+        },
+        {
+          "name": "SQL",
+          "count": 14
+        },
+        {
+          "name": "C++",
+          "count": 12
+        },
+        {
+          "name": "Git",
+          "count": 12
+        },
+        {
+          "name": "TypeScript",
+          "count": 11
+        },
+        {
+          "name": "REST API",
+          "count": 10
+        },
+        {
+          "name": "React",
+          "count": 10
+        },
+        {
+          "name": "Linux",
+          "count": 9
+        },
+        {
+          "name": "Embedded",
+          "count": 8
+        },
+        {
+          "name": "Go",
+          "count": 7
+        },
+        {
+          "name": "Docker",
+          "count": 7
+        },
+        {
+          "name": "PHP",
+          "count": 7
+        },
+        {
+          "name": "Android",
+          "count": 7
+        },
+        {
+          "name": "Kotlin",
+          "count": 7
+        },
+        {
+          "name": "Bitrix",
+          "count": 7
+        },
+        {
+          "name": "ERP",
+          "count": 7
+        },
+        {
+          "name": "CSS",
+          "count": 7
+        },
+        {
+          "name": "HTML",
+          "count": 7
+        },
+        {
+          "name": "CI/CD",
+          "count": 6
+        },
+        {
+          "name": "FastAPI",
+          "count": 6
+        },
+        {
+          "name": "QA",
+          "count": 6
+        },
+        {
+          "name": "Kubernetes",
+          "count": 5
+        },
+        {
+          "name": "Redis",
+          "count": 5
+        },
+        {
+          "name": "CRM",
+          "count": 5
+        },
+        {
+          "name": "Spring",
+          "count": 5
+        },
+        {
+          "name": "JSON",
+          "count": 5
+        },
+        {
+          "name": "Machine Learning",
+          "count": 4
+        },
+        {
+          "name": "LLM",
+          "count": 4
+        },
+        {
+          "name": "Microservices",
+          "count": 4
+        },
+        {
+          "name": "Vue.js",
+          "count": 4
+        },
+        {
+          "name": "XML",
+          "count": 4
+        },
+        {
+          "name": "1С",
+          "count": 4
+        },
+        {
+          "name": "Node.js",
+          "count": 4
+        },
+        {
+          "name": "Kafka",
+          "count": 3
+        },
+        {
+          "name": "DevOps",
+          "count": 3
+        },
+        {
+          "name": "SIEM",
+          "count": 3
+        },
+        {
+          "name": "Shell",
+          "count": 3
+        },
+        {
+          "name": "MySQL",
+          "count": 3
+        },
+        {
+          "name": "SOAP",
+          "count": 3
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 3
+        },
+        {
+          "name": "C#",
+          "count": 3
+        },
+        {
+          "name": "Django",
+          "count": 3
+        },
+        {
+          "name": "Apache",
+          "count": 2
+        },
+        {
+          "name": "ClickHouse",
+          "count": 2
+        },
+        {
+          "name": "Jenkins",
+          "count": 2
+        },
+        {
+          "name": "gRPC",
+          "count": 2
+        },
+        {
+          "name": "Lua",
+          "count": 2
+        },
+        {
+          "name": "ETL",
+          "count": 2
+        },
+        {
+          "name": "Scala",
+          "count": 2
+        },
+        {
+          "name": "Networking",
+          "count": 2
+        },
+        {
+          "name": "Excel",
+          "count": 2
+        },
+        {
+          "name": "Next.js",
+          "count": 2
+        },
+        {
+          "name": "Computer Vision",
+          "count": 2
+        },
+        {
+          "name": "Grafana",
+          "count": 1
+        },
+        {
+          "name": "Prometheus",
+          "count": 1
+        },
+        {
+          "name": "Swagger",
+          "count": 1
+        },
+        {
+          "name": "PyTorch",
+          "count": 1
+        },
+        {
+          "name": "NLP",
+          "count": 1
+        },
+        {
+          "name": "UI/UX",
+          "count": 1
+        },
+        {
+          "name": "Agile",
+          "count": 1
+        },
+        {
+          "name": "Rust",
+          "count": 1
+        },
+        {
+          "name": "Bootstrap",
+          "count": 1
+        },
+        {
+          "name": "AWS",
+          "count": 1
+        },
+        {
+          "name": "Technical Support",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Tailwind CSS",
+          "count": 1
+        },
+        {
+          "name": "Protobuf",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "iOS",
+          "count": 1
+        },
+        {
+          "name": "SEO",
+          "count": 1
+        },
+        {
+          "name": "BPMN",
+          "count": 1
+        },
+        {
+          "name": "Jest",
+          "count": 1
+        },
+        {
+          "name": "Angular",
+          "count": 1
+        },
+        {
+          "name": "SAP",
+          "count": 1
+        },
+        {
+          "name": "Unity",
+          "count": 1
+        },
+        {
+          "name": "Deep Learning",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "Sass",
+          "count": 1
+        },
+        {
+          "name": "Cypress",
+          "count": 1
+        },
+        {
+          "name": "Apache Superset",
+          "count": 1
+        },
+        {
+          "name": "Postman",
+          "count": 1
+        },
+        {
+          "name": "WMS",
+          "count": 1
+        },
+        {
+          "name": "Flutter",
+          "count": 1
+        },
+        {
+          "name": "Ruby",
+          "count": 1
+        },
+        {
+          "name": "Flask",
+          "count": 1
+        },
+        {
+          "name": "GraphQL",
+          "count": 1
+        },
+        {
+          "name": "NoSQL",
+          "count": 1
+        }
+      ],
+      "role_name": "Программист, разработчик"
+    },
+    "164": {
+      "role_id": "164",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 71,
+      "skills": [
+        {
+          "name": "SQL",
+          "count": 36
+        },
+        {
+          "name": "Python",
+          "count": 23
+        },
+        {
+          "name": "Excel",
+          "count": 14
+        },
+        {
+          "name": "ClickHouse",
+          "count": 11
+        },
+        {
+          "name": "Data Analysis",
+          "count": 11
+        },
+        {
+          "name": "Tableau",
+          "count": 10
+        },
+        {
+          "name": "Statistics",
+          "count": 9
+        },
+        {
+          "name": "Power BI",
+          "count": 9
+        },
+        {
+          "name": "Apache Superset",
+          "count": 8
+        },
+        {
+          "name": "Pandas",
+          "count": 6
+        },
+        {
+          "name": "Git",
+          "count": 6
+        },
+        {
+          "name": "Machine Learning",
+          "count": 6
+        },
+        {
+          "name": "QA",
+          "count": 5
+        },
+        {
+          "name": "LLM",
+          "count": 4
+        },
+        {
+          "name": "Networking",
+          "count": 4
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 4
+        },
+        {
+          "name": "Airflow",
+          "count": 3
+        },
+        {
+          "name": "NumPy",
+          "count": 3
+        },
+        {
+          "name": "A/B Testing",
+          "count": 3
+        },
+        {
+          "name": "Business Analysis",
+          "count": 3
+        },
+        {
+          "name": "R",
+          "count": 3
+        },
+        {
+          "name": "Grafana",
+          "count": 2
+        },
+        {
+          "name": "CSS",
+          "count": 2
+        },
+        {
+          "name": "MySQL",
+          "count": 2
+        },
+        {
+          "name": "BPMN",
+          "count": 2
+        },
+        {
+          "name": "Agile",
+          "count": 2
+        },
+        {
+          "name": "SciPy",
+          "count": 2
+        },
+        {
+          "name": "CRM",
+          "count": 2
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 2
+        },
+        {
+          "name": "Product Management",
+          "count": 2
+        },
+        {
+          "name": "Hadoop",
+          "count": 2
+        },
+        {
+          "name": "SEO",
+          "count": 1
+        },
+        {
+          "name": "JavaScript",
+          "count": 1
+        },
+        {
+          "name": "Unity",
+          "count": 1
+        },
+        {
+          "name": "Java",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Bitrix",
+          "count": 1
+        },
+        {
+          "name": "HTML",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        },
+        {
+          "name": "Go",
+          "count": 1
+        },
+        {
+          "name": "Game Development",
+          "count": 1
+        },
+        {
+          "name": "JSON",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "IoT",
+          "count": 1
+        },
+        {
+          "name": "1С",
+          "count": 1
+        },
+        {
+          "name": "ERP",
+          "count": 1
+        },
+        {
+          "name": "DWH",
+          "count": 1
+        },
+        {
+          "name": "dbt",
+          "count": 1
+        },
+        {
+          "name": "Ruby",
+          "count": 1
+        },
+        {
+          "name": "Snowflake",
+          "count": 1
+        },
+        {
+          "name": "Kubernetes",
+          "count": 1
+        },
+        {
+          "name": "DevOps",
+          "count": 1
+        },
+        {
+          "name": "CI/CD",
+          "count": 1
+        },
+        {
+          "name": "REST API",
+          "count": 1
+        },
+        {
+          "name": "Kafka",
+          "count": 1
+        },
+        {
+          "name": "gRPC",
+          "count": 1
+        },
+        {
+          "name": "Hive",
+          "count": 1
+        },
+        {
+          "name": "UI/UX",
+          "count": 1
+        },
+        {
+          "name": "Bootstrap",
+          "count": 1
+        },
+        {
+          "name": "Rust",
+          "count": 1
+        },
+        {
+          "name": "System Analysis",
+          "count": 1
+        },
+        {
+          "name": "SAP",
+          "count": 1
+        }
+      ],
+      "role_name": "Продуктовый аналитик"
+    },
+    "104": {
+      "role_id": "104",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 73,
+      "skills": [
+        {
+          "name": "Java",
+          "count": 13
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 12
+        },
+        {
+          "name": "SQL",
+          "count": 11
+        },
+        {
+          "name": "Python",
+          "count": 10
+        },
+        {
+          "name": "QA",
+          "count": 9
+        },
+        {
+          "name": "Kafka",
+          "count": 9
+        },
+        {
+          "name": "Microservices",
+          "count": 8
+        },
+        {
+          "name": "Go",
+          "count": 8
+        },
+        {
+          "name": "Agile",
+          "count": 7
+        },
+        {
+          "name": "REST API",
+          "count": 7
+        },
+        {
+          "name": "C#",
+          "count": 7
+        },
+        {
+          "name": "CRM",
+          "count": 6
+        },
+        {
+          "name": "CI/CD",
+          "count": 6
+        },
+        {
+          "name": "PHP",
+          "count": 6
+        },
+        {
+          "name": "Kubernetes",
+          "count": 6
+        },
+        {
+          "name": "Machine Learning",
+          "count": 6
+        },
+        {
+          "name": "Linux",
+          "count": 5
+        },
+        {
+          "name": "JavaScript",
+          "count": 5
+        },
+        {
+          "name": "RabbitMQ",
+          "count": 5
+        },
+        {
+          "name": "C++",
+          "count": 4
+        },
+        {
+          "name": "Git",
+          "count": 4
+        },
+        {
+          "name": "DevOps",
+          "count": 4
+        },
+        {
+          "name": "Docker",
+          "count": 4
+        },
+        {
+          "name": "Networking",
+          "count": 3
+        },
+        {
+          "name": "Bitrix",
+          "count": 3
+        },
+        {
+          "name": "ClickHouse",
+          "count": 3
+        },
+        {
+          "name": "React",
+          "count": 3
+        },
+        {
+          "name": "Jira",
+          "count": 3
+        },
+        {
+          "name": "Node.js",
+          "count": 3
+        },
+        {
+          "name": "NoSQL",
+          "count": 3
+        },
+        {
+          "name": "Rust",
+          "count": 3
+        },
+        {
+          "name": "AWS",
+          "count": 3
+        },
+        {
+          "name": "Azure",
+          "count": 3
+        },
+        {
+          "name": "GCP",
+          "count": 3
+        },
+        {
+          "name": "Redis",
+          "count": 3
+        },
+        {
+          "name": "TypeScript",
+          "count": 3
+        },
+        {
+          "name": "Embedded",
+          "count": 2
+        },
+        {
+          "name": "Jenkins",
+          "count": 2
+        },
+        {
+          "name": "HTML",
+          "count": 2
+        },
+        {
+          "name": "MySQL",
+          "count": 2
+        },
+        {
+          "name": "Spring",
+          "count": 2
+        },
+        {
+          "name": "Angular",
+          "count": 2
+        },
+        {
+          "name": "Confluence",
+          "count": 2
+        },
+        {
+          "name": "gRPC",
+          "count": 2
+        },
+        {
+          "name": "ERP",
+          "count": 2
+        },
+        {
+          "name": "Unity",
+          "count": 2
+        },
+        {
+          "name": "LLM",
+          "count": 2
+        },
+        {
+          "name": "Deep Learning",
+          "count": 2
+        },
+        {
+          "name": "Vue.js",
+          "count": 2
+        },
+        {
+          "name": "Swagger",
+          "count": 2
+        },
+        {
+          "name": "Technical Support",
+          "count": 2
+        },
+        {
+          "name": "JSON",
+          "count": 2
+        },
+        {
+          "name": "ETL",
+          "count": 2
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "CSS",
+          "count": 1
+        },
+        {
+          "name": "GitLab CI",
+          "count": 1
+        },
+        {
+          "name": "Unreal Engine",
+          "count": 1
+        },
+        {
+          "name": "IoT",
+          "count": 1
+        },
+        {
+          "name": "Statistics",
+          "count": 1
+        },
+        {
+          "name": "FastAPI",
+          "count": 1
+        },
+        {
+          "name": "Elasticsearch",
+          "count": 1
+        },
+        {
+          "name": "Grafana",
+          "count": 1
+        },
+        {
+          "name": "ELK",
+          "count": 1
+        },
+        {
+          "name": "Prometheus",
+          "count": 1
+        },
+        {
+          "name": "Webpack",
+          "count": 1
+        },
+        {
+          "name": "Scala",
+          "count": 1
+        },
+        {
+          "name": "Lua",
+          "count": 1
+        },
+        {
+          "name": "Mocha",
+          "count": 1
+        },
+        {
+          "name": "Ansible",
+          "count": 1
+        },
+        {
+          "name": "OAuth",
+          "count": 1
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 1
+        },
+        {
+          "name": "XML",
+          "count": 1
+        },
+        {
+          "name": "DWH",
+          "count": 1
+        },
+        {
+          "name": "Airflow",
+          "count": 1
+        },
+        {
+          "name": "Kibana",
+          "count": 1
+        },
+        {
+          "name": "Power BI",
+          "count": 1
+        },
+        {
+          "name": "Apache Superset",
+          "count": 1
+        },
+        {
+          "name": "dbt",
+          "count": 1
+        },
+        {
+          "name": "A/B Testing",
+          "count": 1
+        },
+        {
+          "name": "GraphQL",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "BPMN",
+          "count": 1
+        },
+        {
+          "name": "Django",
+          "count": 1
+        },
+        {
+          "name": "Flutter",
+          "count": 1
+        },
+        {
+          "name": "Data Analysis",
+          "count": 1
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        },
+        {
+          "name": "Swift",
+          "count": 1
+        }
+      ],
+      "role_name": "Руководитель группы разработки"
+    },
+    "157": {
+      "role_id": "157",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 52,
+      "skills": [
+        {
+          "name": "Excel",
+          "count": 18
+        },
+        {
+          "name": "SQL",
+          "count": 11
+        },
+        {
+          "name": "Data Analysis",
+          "count": 6
+        },
+        {
+          "name": "Python",
+          "count": 6
+        },
+        {
+          "name": "Business Analysis",
+          "count": 5
+        },
+        {
+          "name": "DWH",
+          "count": 5
+        },
+        {
+          "name": "CRM",
+          "count": 4
+        },
+        {
+          "name": "Power BI",
+          "count": 4
+        },
+        {
+          "name": "ERP",
+          "count": 4
+        },
+        {
+          "name": "BPMN",
+          "count": 4
+        },
+        {
+          "name": "Git",
+          "count": 4
+        },
+        {
+          "name": "Statistics",
+          "count": 3
+        },
+        {
+          "name": "Networking",
+          "count": 3
+        },
+        {
+          "name": "Machine Learning",
+          "count": 3
+        },
+        {
+          "name": "Agile",
+          "count": 3
+        },
+        {
+          "name": "Google Sheets",
+          "count": 2
+        },
+        {
+          "name": "Tableau",
+          "count": 2
+        },
+        {
+          "name": "1С",
+          "count": 2
+        },
+        {
+          "name": "Project Management",
+          "count": 2
+        },
+        {
+          "name": "QA",
+          "count": 2
+        },
+        {
+          "name": "REST API",
+          "count": 2
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 2
+        },
+        {
+          "name": "System Analysis",
+          "count": 2
+        },
+        {
+          "name": "Pandas",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 1
+        },
+        {
+          "name": "SAP",
+          "count": 1
+        },
+        {
+          "name": "Go",
+          "count": 1
+        },
+        {
+          "name": "OAuth",
+          "count": 1
+        },
+        {
+          "name": "SOAP",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "JSON",
+          "count": 1
+        },
+        {
+          "name": "Cassandra",
+          "count": 1
+        },
+        {
+          "name": "Elasticsearch",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "Docker",
+          "count": 1
+        },
+        {
+          "name": "Kafka",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "Apache Spark",
+          "count": 1
+        },
+        {
+          "name": "Linux",
+          "count": 1
+        },
+        {
+          "name": "Lua",
+          "count": 1
+        },
+        {
+          "name": "NLP",
+          "count": 1
+        },
+        {
+          "name": "Computer Vision",
+          "count": 1
+        },
+        {
+          "name": "C++",
+          "count": 1
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        },
+        {
+          "name": "SEO",
+          "count": 1
+        },
+        {
+          "name": "Technical Support",
+          "count": 1
+        },
+        {
+          "name": "ITIL",
+          "count": 1
+        }
+      ],
+      "role_name": "Руководитель отдела аналитики"
+    },
+    "107": {
+      "role_id": "107",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 40,
+      "skills": [
+        {
+          "name": "Project Management",
+          "count": 20
+        },
+        {
+          "name": "Excel",
+          "count": 8
+        },
+        {
+          "name": "Networking",
+          "count": 5
+        },
+        {
+          "name": "Agile",
+          "count": 5
+        },
+        {
+          "name": "Bitrix",
+          "count": 5
+        },
+        {
+          "name": "CRM",
+          "count": 4
+        },
+        {
+          "name": "Git",
+          "count": 4
+        },
+        {
+          "name": "Jira",
+          "count": 3
+        },
+        {
+          "name": "REST API",
+          "count": 3
+        },
+        {
+          "name": "ERP",
+          "count": 3
+        },
+        {
+          "name": "QA",
+          "count": 3
+        },
+        {
+          "name": "UI/UX",
+          "count": 3
+        },
+        {
+          "name": "Technical Writing",
+          "count": 2
+        },
+        {
+          "name": "WMS",
+          "count": 2
+        },
+        {
+          "name": "CSS",
+          "count": 2
+        },
+        {
+          "name": "Vue.js",
+          "count": 2
+        },
+        {
+          "name": "JavaScript",
+          "count": 2
+        },
+        {
+          "name": "Android",
+          "count": 2
+        },
+        {
+          "name": "Grafana",
+          "count": 2
+        },
+        {
+          "name": "PHP",
+          "count": 2
+        },
+        {
+          "name": "Postman",
+          "count": 2
+        },
+        {
+          "name": "Docker",
+          "count": 2
+        },
+        {
+          "name": "iOS",
+          "count": 2
+        },
+        {
+          "name": "Machine Learning",
+          "count": 2
+        },
+        {
+          "name": "DevOps",
+          "count": 1
+        },
+        {
+          "name": "1С",
+          "count": 1
+        },
+        {
+          "name": "JSON",
+          "count": 1
+        },
+        {
+          "name": "Notion",
+          "count": 1
+        },
+        {
+          "name": "System Analysis",
+          "count": 1
+        },
+        {
+          "name": "Microservices",
+          "count": 1
+        },
+        {
+          "name": "CI/CD",
+          "count": 1
+        },
+        {
+          "name": "MLOps",
+          "count": 1
+        },
+        {
+          "name": "LLM",
+          "count": 1
+        },
+        {
+          "name": "Google Sheets",
+          "count": 1
+        },
+        {
+          "name": "R",
+          "count": 1
+        },
+        {
+          "name": "Cisco",
+          "count": 1
+        },
+        {
+          "name": "SQL",
+          "count": 1
+        },
+        {
+          "name": "SAP",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        }
+      ],
+      "role_name": "Руководитель проектов"
+    },
+    "112": {
+      "role_id": "112",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 72,
+      "skills": [
+        {
+          "name": "Networking",
+          "count": 57
+        },
+        {
+          "name": "Cisco",
+          "count": 25
+        },
+        {
+          "name": "Linux",
+          "count": 13
+        },
+        {
+          "name": "Zabbix",
+          "count": 11
+        },
+        {
+          "name": "QA",
+          "count": 10
+        },
+        {
+          "name": "VMware",
+          "count": 8
+        },
+        {
+          "name": "ETL",
+          "count": 7
+        },
+        {
+          "name": "Python",
+          "count": 7
+        },
+        {
+          "name": "Firewall",
+          "count": 6
+        },
+        {
+          "name": "Technical Support",
+          "count": 5
+        },
+        {
+          "name": "Excel",
+          "count": 4
+        },
+        {
+          "name": "iOS",
+          "count": 4
+        },
+        {
+          "name": "Information Security",
+          "count": 3
+        },
+        {
+          "name": "Shell",
+          "count": 3
+        },
+        {
+          "name": "Nginx",
+          "count": 3
+        },
+        {
+          "name": "Nagios",
+          "count": 3
+        },
+        {
+          "name": "Grafana",
+          "count": 3
+        },
+        {
+          "name": "CRM",
+          "count": 2
+        },
+        {
+          "name": "Technical Writing",
+          "count": 2
+        },
+        {
+          "name": "REST API",
+          "count": 2
+        },
+        {
+          "name": "Ansible",
+          "count": 2
+        },
+        {
+          "name": "Jira",
+          "count": 2
+        },
+        {
+          "name": "Terraform",
+          "count": 2
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 2
+        },
+        {
+          "name": "Docker",
+          "count": 2
+        },
+        {
+          "name": "Google Sheets",
+          "count": 1
+        },
+        {
+          "name": "CSS",
+          "count": 1
+        },
+        {
+          "name": "Windows Server",
+          "count": 1
+        },
+        {
+          "name": "LDAP",
+          "count": 1
+        },
+        {
+          "name": "ITIL",
+          "count": 1
+        },
+        {
+          "name": "Agile",
+          "count": 1
+        },
+        {
+          "name": "RabbitMQ",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "Machine Learning",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "Embedded",
+          "count": 1
+        },
+        {
+          "name": "Rust",
+          "count": 1
+        },
+        {
+          "name": "Prometheus",
+          "count": 1
+        },
+        {
+          "name": "Redis",
+          "count": 1
+        },
+        {
+          "name": "SQL",
+          "count": 1
+        },
+        {
+          "name": "PCI DSS",
+          "count": 1
+        },
+        {
+          "name": "ELK",
+          "count": 1
+        },
+        {
+          "name": "Git",
+          "count": 1
+        },
+        {
+          "name": "LLM",
+          "count": 1
+        }
+      ],
+      "role_name": "Сетевой инженер"
+    },
+    "113": {
+      "role_id": "113",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 73,
+      "skills": [
+        {
+          "name": "Networking",
+          "count": 34
+        },
+        {
+          "name": "Linux",
+          "count": 34
+        },
+        {
+          "name": "Windows Server",
+          "count": 24
+        },
+        {
+          "name": "Zabbix",
+          "count": 13
+        },
+        {
+          "name": "Shell",
+          "count": 9
+        },
+        {
+          "name": "Technical Support",
+          "count": 8
+        },
+        {
+          "name": "SQL",
+          "count": 8
+        },
+        {
+          "name": "Docker",
+          "count": 8
+        },
+        {
+          "name": "Prometheus",
+          "count": 7
+        },
+        {
+          "name": "Python",
+          "count": 7
+        },
+        {
+          "name": "Cisco",
+          "count": 6
+        },
+        {
+          "name": "VMware",
+          "count": 6
+        },
+        {
+          "name": "Grafana",
+          "count": 5
+        },
+        {
+          "name": "Bitrix",
+          "count": 5
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 5
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 5
+        },
+        {
+          "name": "Firewall",
+          "count": 4
+        },
+        {
+          "name": "Ansible",
+          "count": 4
+        },
+        {
+          "name": "Jira",
+          "count": 4
+        },
+        {
+          "name": "Kubernetes",
+          "count": 3
+        },
+        {
+          "name": "ITIL",
+          "count": 3
+        },
+        {
+          "name": "Spring",
+          "count": 3
+        },
+        {
+          "name": "Git",
+          "count": 3
+        },
+        {
+          "name": "iOS",
+          "count": 2
+        },
+        {
+          "name": "Information Security",
+          "count": 2
+        },
+        {
+          "name": "QA",
+          "count": 2
+        },
+        {
+          "name": "TypeScript",
+          "count": 2
+        },
+        {
+          "name": "AWS",
+          "count": 2
+        },
+        {
+          "name": "Elasticsearch",
+          "count": 2
+        },
+        {
+          "name": "ERP",
+          "count": 2
+        },
+        {
+          "name": "CRM",
+          "count": 1
+        },
+        {
+          "name": "PCI DSS",
+          "count": 1
+        },
+        {
+          "name": "LDAP",
+          "count": 1
+        },
+        {
+          "name": "MySQL",
+          "count": 1
+        },
+        {
+          "name": "Terraform",
+          "count": 1
+        },
+        {
+          "name": "REST API",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "Redis",
+          "count": 1
+        },
+        {
+          "name": "Nginx",
+          "count": 1
+        },
+        {
+          "name": "Perl",
+          "count": 1
+        },
+        {
+          "name": "CSS",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "Yandex Cloud",
+          "count": 1
+        },
+        {
+          "name": "COBIT",
+          "count": 1
+        },
+        {
+          "name": "Technical Writing",
+          "count": 1
+        },
+        {
+          "name": "Computer Vision",
+          "count": 1
+        },
+        {
+          "name": "1С",
+          "count": 1
+        },
+        {
+          "name": "LLM",
+          "count": 1
+        },
+        {
+          "name": "Microservices",
+          "count": 1
+        },
+        {
+          "name": "Excel",
+          "count": 1
+        },
+        {
+          "name": "ELK",
+          "count": 1
+        },
+        {
+          "name": "DevOps",
+          "count": 1
+        },
+        {
+          "name": "SAP",
+          "count": 1
+        }
+      ],
+      "role_name": "Системный администратор"
+    },
+    "148": {
+      "role_id": "148",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 90,
+      "skills": [
+        {
+          "name": "System Analysis",
+          "count": 71
+        },
+        {
+          "name": "SQL",
+          "count": 25
+        },
+        {
+          "name": "BPMN",
+          "count": 24
+        },
+        {
+          "name": "REST API",
+          "count": 22
+        },
+        {
+          "name": "Confluence",
+          "count": 10
+        },
+        {
+          "name": "Swagger",
+          "count": 9
+        },
+        {
+          "name": "Git",
+          "count": 8
+        },
+        {
+          "name": "Microservices",
+          "count": 8
+        },
+        {
+          "name": "Jira",
+          "count": 8
+        },
+        {
+          "name": "QA",
+          "count": 8
+        },
+        {
+          "name": "SOAP",
+          "count": 7
+        },
+        {
+          "name": "XML",
+          "count": 7
+        },
+        {
+          "name": "Agile",
+          "count": 7
+        },
+        {
+          "name": "ERP",
+          "count": 7
+        },
+        {
+          "name": "CRM",
+          "count": 7
+        },
+        {
+          "name": "Kafka",
+          "count": 6
+        },
+        {
+          "name": "Postman",
+          "count": 6
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 5
+        },
+        {
+          "name": "JSON",
+          "count": 5
+        },
+        {
+          "name": "Bitrix",
+          "count": 4
+        },
+        {
+          "name": "PHP",
+          "count": 3
+        },
+        {
+          "name": "gRPC",
+          "count": 3
+        },
+        {
+          "name": "Machine Learning",
+          "count": 3
+        },
+        {
+          "name": "Linux",
+          "count": 3
+        },
+        {
+          "name": "Figma",
+          "count": 3
+        },
+        {
+          "name": "UI/UX",
+          "count": 3
+        },
+        {
+          "name": "RabbitMQ",
+          "count": 2
+        },
+        {
+          "name": "GraphQL",
+          "count": 2
+        },
+        {
+          "name": "Python",
+          "count": 2
+        },
+        {
+          "name": "DevOps",
+          "count": 2
+        },
+        {
+          "name": "Business Analysis",
+          "count": 2
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 2
+        },
+        {
+          "name": "Java",
+          "count": 2
+        },
+        {
+          "name": "Excel",
+          "count": 2
+        },
+        {
+          "name": "1С",
+          "count": 2
+        },
+        {
+          "name": "DWH",
+          "count": 2
+        },
+        {
+          "name": "Go",
+          "count": 1
+        },
+        {
+          "name": "React",
+          "count": 1
+        },
+        {
+          "name": "NoSQL",
+          "count": 1
+        },
+        {
+          "name": "JavaScript",
+          "count": 1
+        },
+        {
+          "name": "AWS",
+          "count": 1
+        },
+        {
+          "name": "Scala",
+          "count": 1
+        },
+        {
+          "name": "SIEM",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Unity",
+          "count": 1
+        },
+        {
+          "name": "Information Security",
+          "count": 1
+        },
+        {
+          "name": "Grafana",
+          "count": 1
+        },
+        {
+          "name": "IoT",
+          "count": 1
+        },
+        {
+          "name": "Azure",
+          "count": 1
+        },
+        {
+          "name": "Prometheus",
+          "count": 1
+        },
+        {
+          "name": "CSS",
+          "count": 1
+        },
+        {
+          "name": "HTML",
+          "count": 1
+        },
+        {
+          "name": "Product Management",
+          "count": 1
+        },
+        {
+          "name": "LLM",
+          "count": 1
+        },
+        {
+          "name": "Power BI",
+          "count": 1
+        },
+        {
+          "name": "Spring",
+          "count": 1
+        },
+        {
+          "name": "Angular",
+          "count": 1
+        },
+        {
+          "name": "Kotlin",
+          "count": 1
+        },
+        {
+          "name": "Technical Writing",
+          "count": 1
+        },
+        {
+          "name": "Miro",
+          "count": 1
+        },
+        {
+          "name": "CI/CD",
+          "count": 1
+        },
+        {
+          "name": "Protobuf",
+          "count": 1
+        },
+        {
+          "name": "R",
+          "count": 1
+        },
+        {
+          "name": "NumPy",
+          "count": 1
+        },
+        {
+          "name": "C#",
+          "count": 1
+        },
+        {
+          "name": "Erlang",
+          "count": 1
+        },
+        {
+          "name": "SciPy",
+          "count": 1
+        },
+        {
+          "name": "MLOps",
+          "count": 1
+        },
+        {
+          "name": "SAP",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "MySQL",
+          "count": 1
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        }
+      ],
+      "role_name": "Системный аналитик"
+    },
+    "114": {
+      "role_id": "114",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 58,
+      "skills": [
+        {
+          "name": "Linux",
+          "count": 32
+        },
+        {
+          "name": "Networking",
+          "count": 21
+        },
+        {
+          "name": "Shell",
+          "count": 8
+        },
+        {
+          "name": "Python",
+          "count": 8
+        },
+        {
+          "name": "Windows Server",
+          "count": 8
+        },
+        {
+          "name": "Git",
+          "count": 7
+        },
+        {
+          "name": "Docker",
+          "count": 7
+        },
+        {
+          "name": "QA",
+          "count": 7
+        },
+        {
+          "name": "SQL",
+          "count": 7
+        },
+        {
+          "name": "GitLab CI",
+          "count": 6
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 6
+        },
+        {
+          "name": "Nginx",
+          "count": 6
+        },
+        {
+          "name": "Zabbix",
+          "count": 6
+        },
+        {
+          "name": "VMware",
+          "count": 6
+        },
+        {
+          "name": "Ansible",
+          "count": 5
+        },
+        {
+          "name": "CI/CD",
+          "count": 5
+        },
+        {
+          "name": "Kubernetes",
+          "count": 5
+        },
+        {
+          "name": "Grafana",
+          "count": 4
+        },
+        {
+          "name": "MySQL",
+          "count": 4
+        },
+        {
+          "name": "DevOps",
+          "count": 4
+        },
+        {
+          "name": "REST API",
+          "count": 3
+        },
+        {
+          "name": "SOAP",
+          "count": 3
+        },
+        {
+          "name": "Prometheus",
+          "count": 3
+        },
+        {
+          "name": "JSON",
+          "count": 3
+        },
+        {
+          "name": "XML",
+          "count": 3
+        },
+        {
+          "name": "Jira",
+          "count": 2
+        },
+        {
+          "name": "Kafka",
+          "count": 2
+        },
+        {
+          "name": "Microservices",
+          "count": 2
+        },
+        {
+          "name": "iOS",
+          "count": 2
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 2
+        },
+        {
+          "name": "Jenkins",
+          "count": 2
+        },
+        {
+          "name": "Airflow",
+          "count": 1
+        },
+        {
+          "name": "Elasticsearch",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "Apache Superset",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "gRPC",
+          "count": 1
+        },
+        {
+          "name": "Yandex Cloud",
+          "count": 1
+        },
+        {
+          "name": "PHP",
+          "count": 1
+        },
+        {
+          "name": "Information Security",
+          "count": 1
+        },
+        {
+          "name": "Apache",
+          "count": 1
+        },
+        {
+          "name": "Technical Support",
+          "count": 1
+        },
+        {
+          "name": "Hive",
+          "count": 1
+        },
+        {
+          "name": "Terraform",
+          "count": 1
+        },
+        {
+          "name": "Technical Writing",
+          "count": 1
+        },
+        {
+          "name": "C#",
+          "count": 1
+        },
+        {
+          "name": "1С",
+          "count": 1
+        },
+        {
+          "name": "ITIL",
+          "count": 1
+        },
+        {
+          "name": "Machine Learning",
+          "count": 1
+        },
+        {
+          "name": "ERP",
+          "count": 1
+        },
+        {
+          "name": "Cisco",
+          "count": 1
+        },
+        {
+          "name": "Hadoop",
+          "count": 1
+        },
+        {
+          "name": "Adobe Illustrator",
+          "count": 1
+        },
+        {
+          "name": "Adobe Photoshop",
+          "count": 1
+        },
+        {
+          "name": "OpenStack",
+          "count": 1
+        },
+        {
+          "name": "R",
+          "count": 1
+        },
+        {
+          "name": "SIEM",
+          "count": 1
+        }
+      ],
+      "role_name": "Системный инженер"
+    },
+    "116": {
+      "role_id": "116",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 52,
+      "skills": [
+        {
+          "name": "Information Security",
+          "count": 16
+        },
+        {
+          "name": "Networking",
+          "count": 15
+        },
+        {
+          "name": "Linux",
+          "count": 12
+        },
+        {
+          "name": "SIEM",
+          "count": 9
+        },
+        {
+          "name": "Firewall",
+          "count": 7
+        },
+        {
+          "name": "QA",
+          "count": 6
+        },
+        {
+          "name": "Kubernetes",
+          "count": 5
+        },
+        {
+          "name": "ISO 27001",
+          "count": 4
+        },
+        {
+          "name": "Penetration Testing",
+          "count": 4
+        },
+        {
+          "name": "Docker",
+          "count": 4
+        },
+        {
+          "name": "Shell",
+          "count": 4
+        },
+        {
+          "name": "Cisco",
+          "count": 3
+        },
+        {
+          "name": "DevOps",
+          "count": 3
+        },
+        {
+          "name": "Python",
+          "count": 3
+        },
+        {
+          "name": "VMware",
+          "count": 3
+        },
+        {
+          "name": "R",
+          "count": 3
+        },
+        {
+          "name": "Windows Server",
+          "count": 3
+        },
+        {
+          "name": "Microservices",
+          "count": 2
+        },
+        {
+          "name": "Ansible",
+          "count": 2
+        },
+        {
+          "name": "Git",
+          "count": 2
+        },
+        {
+          "name": "GitLab CI",
+          "count": 2
+        },
+        {
+          "name": "CI/CD",
+          "count": 2
+        },
+        {
+          "name": "DWH",
+          "count": 2
+        },
+        {
+          "name": "ERP",
+          "count": 2
+        },
+        {
+          "name": "Embedded",
+          "count": 1
+        },
+        {
+          "name": "Android",
+          "count": 1
+        },
+        {
+          "name": "iOS",
+          "count": 1
+        },
+        {
+          "name": "GitHub Actions",
+          "count": 1
+        },
+        {
+          "name": "Computer Vision",
+          "count": 1
+        },
+        {
+          "name": "Go",
+          "count": 1
+        },
+        {
+          "name": "System Design",
+          "count": 1
+        },
+        {
+          "name": "Bitrix",
+          "count": 1
+        },
+        {
+          "name": "CRM",
+          "count": 1
+        },
+        {
+          "name": "LDAP",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "1С",
+          "count": 1
+        },
+        {
+          "name": "Spring",
+          "count": 1
+        },
+        {
+          "name": "JSON",
+          "count": 1
+        },
+        {
+          "name": "SQL",
+          "count": 1
+        },
+        {
+          "name": "XML",
+          "count": 1
+        },
+        {
+          "name": "WMS",
+          "count": 1
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 1
+        },
+        {
+          "name": "Hadoop",
+          "count": 1
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "MATLAB",
+          "count": 1
+        },
+        {
+          "name": "REST API",
+          "count": 1
+        },
+        {
+          "name": "Technical Support",
+          "count": 1
+        },
+        {
+          "name": "ELK",
+          "count": 1
+        },
+        {
+          "name": "OpenStack",
+          "count": 1
+        }
+      ],
+      "role_name": "Специалист по информационной безопасности"
+    },
+    "121": {
+      "role_id": "121",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 46,
+      "skills": [
+        {
+          "name": "Technical Support",
+          "count": 16
+        },
+        {
+          "name": "Networking",
+          "count": 13
+        },
+        {
+          "name": "Linux",
+          "count": 12
+        },
+        {
+          "name": "SQL",
+          "count": 7
+        },
+        {
+          "name": "Excel",
+          "count": 5
+        },
+        {
+          "name": "Windows Server",
+          "count": 4
+        },
+        {
+          "name": "QA",
+          "count": 3
+        },
+        {
+          "name": "CRM",
+          "count": 3
+        },
+        {
+          "name": "Power BI",
+          "count": 3
+        },
+        {
+          "name": "Git",
+          "count": 2
+        },
+        {
+          "name": "Zabbix",
+          "count": 2
+        },
+        {
+          "name": "Jira",
+          "count": 2
+        },
+        {
+          "name": "Grafana",
+          "count": 2
+        },
+        {
+          "name": "Bitrix",
+          "count": 2
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 1
+        },
+        {
+          "name": "Nagios",
+          "count": 1
+        },
+        {
+          "name": "iOS",
+          "count": 1
+        },
+        {
+          "name": "MySQL",
+          "count": 1
+        },
+        {
+          "name": "Data Analysis",
+          "count": 1
+        },
+        {
+          "name": "Scala",
+          "count": 1
+        },
+        {
+          "name": "Nginx",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "Information Security",
+          "count": 1
+        },
+        {
+          "name": "Prometheus",
+          "count": 1
+        },
+        {
+          "name": "MS SQL Server",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Agile",
+          "count": 1
+        },
+        {
+          "name": "Java",
+          "count": 1
+        },
+        {
+          "name": "JavaScript",
+          "count": 1
+        },
+        {
+          "name": "DevOps",
+          "count": 1
+        },
+        {
+          "name": "Python",
+          "count": 1
+        },
+        {
+          "name": "WMS",
+          "count": 1
+        }
+      ],
+      "role_name": "Специалист технической поддержки"
+    },
+    "124": {
+      "role_id": "124",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 89,
+      "skills": [
+        {
+          "name": "QA",
+          "count": 77
+        },
+        {
+          "name": "Java",
+          "count": 21
+        },
+        {
+          "name": "Python",
+          "count": 20
+        },
+        {
+          "name": "Git",
+          "count": 18
+        },
+        {
+          "name": "REST API",
+          "count": 15
+        },
+        {
+          "name": "SQL",
+          "count": 14
+        },
+        {
+          "name": "CI/CD",
+          "count": 13
+        },
+        {
+          "name": "Postman",
+          "count": 11
+        },
+        {
+          "name": "JavaScript",
+          "count": 8
+        },
+        {
+          "name": "Playwright",
+          "count": 7
+        },
+        {
+          "name": "Networking",
+          "count": 6
+        },
+        {
+          "name": "Swagger",
+          "count": 6
+        },
+        {
+          "name": "Android",
+          "count": 6
+        },
+        {
+          "name": "iOS",
+          "count": 6
+        },
+        {
+          "name": "Jira",
+          "count": 5
+        },
+        {
+          "name": "Kubernetes",
+          "count": 5
+        },
+        {
+          "name": "Docker",
+          "count": 5
+        },
+        {
+          "name": "Selenium",
+          "count": 5
+        },
+        {
+          "name": "JUnit",
+          "count": 5
+        },
+        {
+          "name": "pytest",
+          "count": 5
+        },
+        {
+          "name": "Linux",
+          "count": 4
+        },
+        {
+          "name": "SOAP",
+          "count": 4
+        },
+        {
+          "name": "DevOps",
+          "count": 4
+        },
+        {
+          "name": "Jenkins",
+          "count": 4
+        },
+        {
+          "name": "TestNG",
+          "count": 4
+        },
+        {
+          "name": "GitLab CI",
+          "count": 4
+        },
+        {
+          "name": "HTML",
+          "count": 4
+        },
+        {
+          "name": "TypeScript",
+          "count": 3
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 3
+        },
+        {
+          "name": "Microservices",
+          "count": 3
+        },
+        {
+          "name": "LLM",
+          "count": 3
+        },
+        {
+          "name": "Kafka",
+          "count": 3
+        },
+        {
+          "name": "C#",
+          "count": 2
+        },
+        {
+          "name": "Unreal Engine",
+          "count": 2
+        },
+        {
+          "name": "Charles Proxy",
+          "count": 2
+        },
+        {
+          "name": "Appium",
+          "count": 2
+        },
+        {
+          "name": "GraphQL",
+          "count": 2
+        },
+        {
+          "name": "Shell",
+          "count": 2
+        },
+        {
+          "name": "gRPC",
+          "count": 2
+        },
+        {
+          "name": "CSS",
+          "count": 2
+        },
+        {
+          "name": "PHP",
+          "count": 2
+        },
+        {
+          "name": "Agile",
+          "count": 2
+        },
+        {
+          "name": "Cypress",
+          "count": 2
+        },
+        {
+          "name": "Unity",
+          "count": 2
+        },
+        {
+          "name": "UI/UX",
+          "count": 2
+        },
+        {
+          "name": "TMS",
+          "count": 2
+        },
+        {
+          "name": "Go",
+          "count": 2
+        },
+        {
+          "name": "Kibana",
+          "count": 1
+        },
+        {
+          "name": "Grafana",
+          "count": 1
+        },
+        {
+          "name": "OAuth",
+          "count": 1
+        },
+        {
+          "name": "Spring",
+          "count": 1
+        },
+        {
+          "name": "Excel",
+          "count": 1
+        },
+        {
+          "name": "AWS",
+          "count": 1
+        },
+        {
+          "name": "Confluence",
+          "count": 1
+        },
+        {
+          "name": "SIEM",
+          "count": 1
+        },
+        {
+          "name": "Cucumber",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "Bitrix",
+          "count": 1
+        },
+        {
+          "name": "BPMN",
+          "count": 1
+        },
+        {
+          "name": "JSON",
+          "count": 1
+        },
+        {
+          "name": "Vue.js",
+          "count": 1
+        },
+        {
+          "name": "FastAPI",
+          "count": 1
+        },
+        {
+          "name": "TensorFlow",
+          "count": 1
+        },
+        {
+          "name": "PyTorch",
+          "count": 1
+        },
+        {
+          "name": "Mocha",
+          "count": 1
+        },
+        {
+          "name": "Oracle DB",
+          "count": 1
+        },
+        {
+          "name": "Protobuf",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "Next.js",
+          "count": 1
+        },
+        {
+          "name": "Flask",
+          "count": 1
+        },
+        {
+          "name": "System Analysis",
+          "count": 1
+        },
+        {
+          "name": "Windows Server",
+          "count": 1
+        },
+        {
+          "name": "Penetration Testing",
+          "count": 1
+        },
+        {
+          "name": "Angular",
+          "count": 1
+        },
+        {
+          "name": "VMware",
+          "count": 1
+        },
+        {
+          "name": "Game Development",
+          "count": 1
+        },
+        {
+          "name": "Machine Learning",
+          "count": 1
+        },
+        {
+          "name": "Kotlin",
+          "count": 1
+        },
+        {
+          "name": "ETL",
+          "count": 1
+        },
+        {
+          "name": "DWH",
+          "count": 1
+        },
+        {
+          "name": "C++",
+          "count": 1
+        },
+        {
+          "name": "React",
+          "count": 1
+        }
+      ],
+      "role_name": "Тестировщик"
+    },
+    "125": {
+      "role_id": "125",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 25,
+      "skills": [
+        {
+          "name": "Excel",
+          "count": 6
+        },
+        {
+          "name": "CRM",
+          "count": 5
+        },
+        {
+          "name": "ERP",
+          "count": 4
+        },
+        {
+          "name": "DevOps",
+          "count": 4
+        },
+        {
+          "name": "Networking",
+          "count": 4
+        },
+        {
+          "name": "Project Management",
+          "count": 3
+        },
+        {
+          "name": "Git",
+          "count": 3
+        },
+        {
+          "name": "CI/CD",
+          "count": 3
+        },
+        {
+          "name": "Bitrix",
+          "count": 2
+        },
+        {
+          "name": "Kubernetes",
+          "count": 2
+        },
+        {
+          "name": "1С",
+          "count": 2
+        },
+        {
+          "name": "R",
+          "count": 2
+        },
+        {
+          "name": "Technical Writing",
+          "count": 2
+        },
+        {
+          "name": "Zabbix",
+          "count": 2
+        },
+        {
+          "name": "FastAPI",
+          "count": 2
+        },
+        {
+          "name": "PHP",
+          "count": 2
+        },
+        {
+          "name": "Python",
+          "count": 2
+        },
+        {
+          "name": "Redis",
+          "count": 2
+        },
+        {
+          "name": "MySQL",
+          "count": 2
+        },
+        {
+          "name": "QA",
+          "count": 2
+        },
+        {
+          "name": "ITIL",
+          "count": 1
+        },
+        {
+          "name": "Jira",
+          "count": 1
+        },
+        {
+          "name": "AWS",
+          "count": 1
+        },
+        {
+          "name": "Machine Learning",
+          "count": 1
+        },
+        {
+          "name": "Azure",
+          "count": 1
+        },
+        {
+          "name": "WMS",
+          "count": 1
+        },
+        {
+          "name": "Agile",
+          "count": 1
+        },
+        {
+          "name": "C++",
+          "count": 1
+        },
+        {
+          "name": "Game Development",
+          "count": 1
+        },
+        {
+          "name": "Unreal Engine",
+          "count": 1
+        },
+        {
+          "name": "C#",
+          "count": 1
+        },
+        {
+          "name": "Unity",
+          "count": 1
+        },
+        {
+          "name": "Cisco",
+          "count": 1
+        },
+        {
+          "name": "Vue.js",
+          "count": 1
+        },
+        {
+          "name": "Nginx",
+          "count": 1
+        },
+        {
+          "name": "JavaScript",
+          "count": 1
+        },
+        {
+          "name": "RabbitMQ",
+          "count": 1
+        },
+        {
+          "name": "Android",
+          "count": 1
+        },
+        {
+          "name": "GraphQL",
+          "count": 1
+        },
+        {
+          "name": "Grafana",
+          "count": 1
+        },
+        {
+          "name": "Yandex Cloud",
+          "count": 1
+        },
+        {
+          "name": "Swift",
+          "count": 1
+        },
+        {
+          "name": "Webpack",
+          "count": 1
+        },
+        {
+          "name": "MongoDB",
+          "count": 1
+        },
+        {
+          "name": "Kafka",
+          "count": 1
+        },
+        {
+          "name": "REST API",
+          "count": 1
+        },
+        {
+          "name": "Django",
+          "count": 1
+        },
+        {
+          "name": "Kotlin",
+          "count": 1
+        },
+        {
+          "name": "iOS",
+          "count": 1
+        },
+        {
+          "name": "GitLab CI",
+          "count": 1
+        },
+        {
+          "name": "System Design",
+          "count": 1
+        },
+        {
+          "name": "TypeScript",
+          "count": 1
+        },
+        {
+          "name": "Vuex",
+          "count": 1
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 1
+        },
+        {
+          "name": "GitHub Actions",
+          "count": 1
+        },
+        {
+          "name": "Microservices",
+          "count": 1
+        },
+        {
+          "name": "gRPC",
+          "count": 1
+        },
+        {
+          "name": "Prometheus",
+          "count": 1
+        },
+        {
+          "name": "Docker",
+          "count": 1
+        },
+        {
+          "name": "System Analysis",
+          "count": 1
+        },
+        {
+          "name": "ClickHouse",
+          "count": 1
+        },
+        {
+          "name": "Embedded",
+          "count": 1
+        },
+        {
+          "name": "IoT",
+          "count": 1
+        },
+        {
+          "name": "Lua",
+          "count": 1
+        }
+      ],
+      "role_name": "Технический директор (CTO)"
+    },
+    "126": {
+      "role_id": "126",
+      "vacancies_scanned": 100,
+      "vacancies_with_skills": 27,
+      "skills": [
+        {
+          "name": "Excel",
+          "count": 7
+        },
+        {
+          "name": "Deep Learning",
+          "count": 7
+        },
+        {
+          "name": "LLM",
+          "count": 4
+        },
+        {
+          "name": "Linux",
+          "count": 3
+        },
+        {
+          "name": "JSON",
+          "count": 3
+        },
+        {
+          "name": "Confluence",
+          "count": 2
+        },
+        {
+          "name": "Jira",
+          "count": 2
+        },
+        {
+          "name": "Adobe Photoshop",
+          "count": 2
+        },
+        {
+          "name": "Technical Writing",
+          "count": 2
+        },
+        {
+          "name": "Data Analysis",
+          "count": 1
+        },
+        {
+          "name": "Adobe Illustrator",
+          "count": 1
+        },
+        {
+          "name": "Power BI",
+          "count": 1
+        },
+        {
+          "name": "PostgreSQL",
+          "count": 1
+        },
+        {
+          "name": "Embedded",
+          "count": 1
+        },
+        {
+          "name": "Android",
+          "count": 1
+        },
+        {
+          "name": "iOS",
+          "count": 1
+        },
+        {
+          "name": "Bitrix",
+          "count": 1
+        },
+        {
+          "name": "CSS",
+          "count": 1
+        },
+        {
+          "name": "Project Management",
+          "count": 1
+        },
+        {
+          "name": "HTML",
+          "count": 1
+        },
+        {
+          "name": "Networking",
+          "count": 1
+        },
+        {
+          "name": "Git",
+          "count": 1
+        },
+        {
+          "name": "Swagger",
+          "count": 1
+        }
+      ],
+      "role_name": "Технический писатель"
+    }
+  },
+  "global": [
+    {
+      "name": "SQL",
+      "count": 262
+    },
+    {
+      "name": "Networking",
+      "count": 223
+    },
+    {
+      "name": "Python",
+      "count": 196
+    },
+    {
+      "name": "Linux",
+      "count": 190
+    },
+    {
+      "name": "QA",
+      "count": 189
+    },
+    {
+      "name": "Git",
+      "count": 155
+    },
+    {
+      "name": "Excel",
+      "count": 154
+    },
+    {
+      "name": "PostgreSQL",
+      "count": 108
+    },
+    {
+      "name": "DevOps",
+      "count": 106
+    },
+    {
+      "name": "ERP",
+      "count": 91
+    },
+    {
+      "name": "Machine Learning",
+      "count": 90
+    },
+    {
+      "name": "REST API",
+      "count": 89
+    },
+    {
+      "name": "System Analysis",
+      "count": 86
+    },
+    {
+      "name": "Docker",
+      "count": 81
+    },
+    {
+      "name": "CI/CD",
+      "count": 79
+    },
+    {
+      "name": "CRM",
+      "count": 75
+    },
+    {
+      "name": "Kubernetes",
+      "count": 71
+    },
+    {
+      "name": "Java",
+      "count": 63
+    },
+    {
+      "name": "BPMN",
+      "count": 60
+    },
+    {
+      "name": "Bitrix",
+      "count": 60
+    },
+    {
+      "name": "LLM",
+      "count": 59
+    },
+    {
+      "name": "Project Management",
+      "count": 58
+    },
+    {
+      "name": "Jira",
+      "count": 56
+    },
+    {
+      "name": "Agile",
+      "count": 54
+    },
+    {
+      "name": "Windows Server",
+      "count": 54
+    },
+    {
+      "name": "Data Analysis",
+      "count": 51
+    },
+    {
+      "name": "ClickHouse",
+      "count": 51
+    },
+    {
+      "name": "Game Development",
+      "count": 51
+    },
+    {
+      "name": "Shell",
+      "count": 49
+    },
+    {
+      "name": "Adobe Photoshop",
+      "count": 47
+    },
+    {
+      "name": "Power BI",
+      "count": 46
+    },
+    {
+      "name": "1С",
+      "count": 46
+    },
+    {
+      "name": "Kafka",
+      "count": 45
+    },
+    {
+      "name": "Zabbix",
+      "count": 44
+    },
+    {
+      "name": "Microservices",
+      "count": 43
+    },
+    {
+      "name": "Grafana",
+      "count": 42
+    },
+    {
+      "name": "JavaScript",
+      "count": 40
+    },
+    {
+      "name": "MS SQL Server",
+      "count": 39
+    },
+    {
+      "name": "Business Analysis",
+      "count": 39
+    },
+    {
+      "name": "Technical Support",
+      "count": 39
+    },
+    {
+      "name": "Cisco",
+      "count": 38
+    },
+    {
+      "name": "Deep Learning",
+      "count": 37
+    },
+    {
+      "name": "Figma",
+      "count": 37
+    },
+    {
+      "name": "ETL",
+      "count": 36
+    },
+    {
+      "name": "Ansible",
+      "count": 36
+    },
+    {
+      "name": "VMware",
+      "count": 34
+    },
+    {
+      "name": "Information Security",
+      "count": 34
+    },
+    {
+      "name": "Unity",
+      "count": 34
+    },
+    {
+      "name": "Product Management",
+      "count": 34
+    },
+    {
+      "name": "Confluence",
+      "count": 33
+    },
+    {
+      "name": "iOS",
+      "count": 32
+    },
+    {
+      "name": "UI/UX",
+      "count": 30
+    },
+    {
+      "name": "GitLab CI",
+      "count": 30
+    },
+    {
+      "name": "DWH",
+      "count": 29
+    },
+    {
+      "name": "Prometheus",
+      "count": 29
+    },
+    {
+      "name": "Adobe Illustrator",
+      "count": 29
+    },
+    {
+      "name": "Go",
+      "count": 28
+    },
+    {
+      "name": "Apache",
+      "count": 27
+    },
+    {
+      "name": "PHP",
+      "count": 27
+    },
+    {
+      "name": "Pandas",
+      "count": 26
+    },
+    {
+      "name": "JSON",
+      "count": 26
+    },
+    {
+      "name": "MySQL",
+      "count": 26
+    },
+    {
+      "name": "C#",
+      "count": 26
+    },
+    {
+      "name": "Nginx",
+      "count": 26
+    },
+    {
+      "name": "CSS",
+      "count": 26
+    },
+    {
+      "name": "C++",
+      "count": 26
+    },
+    {
+      "name": "Android",
+      "count": 26
+    },
+    {
+      "name": "Jenkins",
+      "count": 25
+    },
+    {
+      "name": "Oracle DB",
+      "count": 24
+    },
+    {
+      "name": "Airflow",
+      "count": 24
+    },
+    {
+      "name": "Firewall",
+      "count": 24
+    },
+    {
+      "name": "Statistics",
+      "count": 23
+    },
+    {
+      "name": "Tableau",
+      "count": 22
+    },
+    {
+      "name": "Redis",
+      "count": 21
+    },
+    {
+      "name": "TypeScript",
+      "count": 21
+    },
+    {
+      "name": "R",
+      "count": 20
+    },
+    {
+      "name": "Swagger",
+      "count": 20
+    },
+    {
+      "name": "SOAP",
+      "count": 20
+    },
+    {
+      "name": "Postman",
+      "count": 20
+    },
+    {
+      "name": "SIEM",
+      "count": 19
+    },
+    {
+      "name": "XML",
+      "count": 18
+    },
+    {
+      "name": "HTML",
+      "count": 18
+    },
+    {
+      "name": "PyTorch",
+      "count": 18
+    },
+    {
+      "name": "Apache Superset",
+      "count": 17
+    },
+    {
+      "name": "Unreal Engine",
+      "count": 17
+    },
+    {
+      "name": "Hadoop",
+      "count": 16
+    },
+    {
+      "name": "SAP",
+      "count": 16
+    },
+    {
+      "name": "AWS",
+      "count": 16
+    },
+    {
+      "name": "Embedded",
+      "count": 16
+    },
+    {
+      "name": "NLP",
+      "count": 16
+    },
+    {
+      "name": "React",
+      "count": 16
+    },
+    {
+      "name": "Apache Spark",
+      "count": 15
+    },
+    {
+      "name": "NumPy",
+      "count": 15
+    },
+    {
+      "name": "Terraform",
+      "count": 15
+    },
+    {
+      "name": "gRPC",
+      "count": 15
+    },
+    {
+      "name": "WMS",
+      "count": 15
+    },
+    {
+      "name": "ITIL",
+      "count": 14
+    },
+    {
+      "name": "MongoDB",
+      "count": 13
+    },
+    {
+      "name": "RabbitMQ",
+      "count": 13
+    },
+    {
+      "name": "A/B Testing",
+      "count": 13
+    },
+    {
+      "name": "Computer Vision",
+      "count": 13
+    },
+    {
+      "name": "FastAPI",
+      "count": 13
+    },
+    {
+      "name": "Spring",
+      "count": 13
+    },
+    {
+      "name": "Google Sheets",
+      "count": 12
+    },
+    {
+      "name": "Kotlin",
+      "count": 12
+    },
+    {
+      "name": "Technical Writing",
+      "count": 12
+    },
+    {
+      "name": "NoSQL",
+      "count": 11
+    },
+    {
+      "name": "MLOps",
+      "count": 11
+    },
+    {
+      "name": "Scala",
+      "count": 10
+    },
+    {
+      "name": "Elasticsearch",
+      "count": 10
+    },
+    {
+      "name": "Azure",
+      "count": 10
+    },
+    {
+      "name": "Vue.js",
+      "count": 10
+    },
+    {
+      "name": "Miro",
+      "count": 9
+    },
+    {
+      "name": "ELK",
+      "count": 9
+    },
+    {
+      "name": "SciPy",
+      "count": 8
+    },
+    {
+      "name": "GCP",
+      "count": 8
+    },
+    {
+      "name": "Rust",
+      "count": 8
+    },
+    {
+      "name": "IoT",
+      "count": 8
+    },
+    {
+      "name": "Node.js",
+      "count": 8
+    },
+    {
+      "name": "Yandex Cloud",
+      "count": 7
+    },
+    {
+      "name": "SEO",
+      "count": 7
+    },
+    {
+      "name": "TensorFlow",
+      "count": 7
+    },
+    {
+      "name": "Lua",
+      "count": 7
+    },
+    {
+      "name": "GraphQL",
+      "count": 7
+    },
+    {
+      "name": "Playwright",
+      "count": 7
+    },
+    {
+      "name": "dbt",
+      "count": 6
+    },
+    {
+      "name": "Mocha",
+      "count": 6
+    },
+    {
+      "name": "LDAP",
+      "count": 6
+    },
+    {
+      "name": "System Design",
+      "count": 6
+    },
+    {
+      "name": "ISO 27001",
+      "count": 6
+    },
+    {
+      "name": "GitHub Actions",
+      "count": 5
+    },
+    {
+      "name": "Django",
+      "count": 5
+    },
+    {
+      "name": "Angular",
+      "count": 5
+    },
+    {
+      "name": "Penetration Testing",
+      "count": 5
+    },
+    {
+      "name": "Selenium",
+      "count": 5
+    },
+    {
+      "name": "JUnit",
+      "count": 5
+    },
+    {
+      "name": "pytest",
+      "count": 5
+    },
+    {
+      "name": "Hive",
+      "count": 4
+    },
+    {
+      "name": "Swift",
+      "count": 4
+    },
+    {
+      "name": "COBIT",
+      "count": 4
+    },
+    {
+      "name": "OAuth",
+      "count": 4
+    },
+    {
+      "name": "Nagios",
+      "count": 4
+    },
+    {
+      "name": "TestNG",
+      "count": 4
+    },
+    {
+      "name": "Snowflake",
+      "count": 3
+    },
+    {
+      "name": "Webpack",
+      "count": 3
+    },
+    {
+      "name": "Sketch",
+      "count": 3
+    },
+    {
+      "name": "Notion",
+      "count": 3
+    },
+    {
+      "name": "Flask",
+      "count": 3
+    },
+    {
+      "name": "PCI DSS",
+      "count": 3
+    },
+    {
+      "name": "OpenStack",
+      "count": 3
+    },
+    {
+      "name": "TMS",
+      "count": 3
+    },
+    {
+      "name": "Next.js",
+      "count": 3
+    },
+    {
+      "name": "Protobuf",
+      "count": 3
+    },
+    {
+      "name": "Cypress",
+      "count": 3
+    },
+    {
+      "name": "OLAP",
+      "count": 2
+    },
+    {
+      "name": "Blockchain",
+      "count": 2
+    },
+    {
+      "name": "MATLAB",
+      "count": 2
+    },
+    {
+      "name": "Bootstrap",
+      "count": 2
+    },
+    {
+      "name": "Flutter",
+      "count": 2
+    },
+    {
+      "name": "Ruby",
+      "count": 2
+    },
+    {
+      "name": "Kibana",
+      "count": 2
+    },
+    {
+      "name": "Charles Proxy",
+      "count": 2
+    },
+    {
+      "name": "Appium",
+      "count": 2
+    },
+    {
+      "name": "Logstash",
+      "count": 1
+    },
+    {
+      "name": "Storybook",
+      "count": 1
+    },
+    {
+      "name": "Tailwind CSS",
+      "count": 1
+    },
+    {
+      "name": "Jest",
+      "count": 1
+    },
+    {
+      "name": "Sass",
+      "count": 1
+    },
+    {
+      "name": "Cassandra",
+      "count": 1
+    },
+    {
+      "name": "Perl",
+      "count": 1
+    },
+    {
+      "name": "Erlang",
+      "count": 1
+    },
+    {
+      "name": "Cucumber",
+      "count": 1
+    },
+    {
+      "name": "Vuex",
+      "count": 1
+    }
+  ],
+  "collected_at": "2026-06-17T18:28:37.387208+00:00"
+}

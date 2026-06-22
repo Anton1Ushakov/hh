@@ -1,44 +1,53 @@
 {% extends "base.html" %}
 
-{% block title %}Калькулятор рынка труда - HH Analytics{% endblock %}
+{% block title %}Калькулятор рынка труда{% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1>Калькулятор рынка труда</h1>
-    <p>Сравните количество вакансий и резюме на hh.ru с разными фильтрами</p>
-    {% if auth_message == 'ok' %}
-    <p class="auth-banner auth-ok">Авторизация HH.ru прошла успешно.</p>
-    {% elif auth_message == 'error' %}
-    <p class="auth-banner auth-error">Ошибка авторизации. Проверьте redirect URI в dev.hh.ru.</p>
-    {% endif %}
-</div>
+<div class="space-y-8">
+    <!-- Page header -->
+    <div class="space-y-2">
+        <p class="text-xs font-medium uppercase tracking-wider text-zinc-500">Labor market intelligence</p>
+        <h1 class="text-2xl font-semibold tracking-tight text-zinc-950 sm:text-3xl">Калькулятор рынка труда</h1>
+        <p class="max-w-2xl text-sm leading-relaxed text-zinc-500">
+            Сравните спрос и предложение на рынке труда по ключевым параметрам. Аналитика по зарплате и навыкам строится по выборке вакансий.
+        </p>
+        {% if auth_message == 'ok' %}
+        <div class="inline-flex items-center rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+            Авторизация прошла успешно.
+        </div>
+        {% elif auth_message == 'error' %}
+        <div class="inline-flex items-center rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+            Ошибка авторизации. Проверьте redirect URI в настройках OAuth-приложения.
+        </div>
+        {% endif %}
+    </div>
 
-<div class="calculator-container">
-    <form id="calculator-form" class="search-form">
-        
-        <!-- Common Filters -->
-        <div class="form-section common-filters">
-            <h3>Общие параметры</h3>
-            
-            <div class="form-group">
-                <label for="text">Ключевое слово</label>
+    <!-- Search form -->
+    <form id="calculator-form" class="rounded-lg border border-zinc-200 bg-white shadow-card">
+        <div class="border-b border-zinc-200 px-6 py-4">
+            <h2 class="text-sm font-semibold text-zinc-950">Параметры поиска</h2>
+            <p class="mt-1 text-xs text-zinc-500">Ключевое слово, регион и фильтры активности</p>
+        </div>
+
+        <div class="space-y-6 p-6">
+            <input type="hidden" id="resume_text_logic" name="resume_text_logic" value="all">
+            <input type="hidden" id="resume_text_field" name="resume_text_field" value="title">
+
+            <div class="space-y-2">
+                <label for="text" class="hh-label">Ключевое слово</label>
                 <div class="searchable-select" id="keyword-suggest-container">
-                    <input type="text" id="text" name="text" class="searchable-select-input"
-                           placeholder="Например: Python разработчик" autocomplete="off">
+                    <input type="text" id="text" name="text" class="hh-input searchable-select-input"
+                           placeholder="Python, DevOps, Product Manager…" autocomplete="off">
                     <div class="searchable-select-list" id="keyword-suggest-list"></div>
                 </div>
             </div>
 
-            <!-- Resume Search Fields - text.* triad (hidden, defaults: title, all — aligned with vacancy name search) -->
-            <input type="hidden" id="resume_text_logic" name="resume_text_logic" value="all">
-            <input type="hidden" id="resume_text_field" name="resume_text_field" value="title">
-
-            <div class="form-row">
-                <!-- Region with search -->
-                <div class="form-group">
-                    <label for="area">Регион</label>
+            <div class="grid gap-6 sm:grid-cols-2">
+                <div class="space-y-2">
+                    <label for="area-search" class="hh-label">Регион</label>
                     <div class="searchable-select" id="area-select-container">
-                        <input type="text" class="searchable-select-input" id="area-search" placeholder="🔍 Поиск региона..." autocomplete="off">
+                        <input type="text" class="hh-input searchable-select-input" id="area-search"
+                               placeholder="Поиск региона…" autocomplete="off">
                         <select id="area" name="area" class="hidden-select" style="display: none;">
                             <option value="">Все регионы</option>
                             {% for area in areas %}
@@ -46,7 +55,7 @@
                             {% endfor %}
                         </select>
                         <div class="searchable-select-list" id="area-list">
-                            <div class="searchable-select-option" data-value="">📍 Все регионы</div>
+                            <div class="searchable-select-option" data-value="">Все регионы</div>
                             {% for area in areas %}
                             <div class="searchable-select-option" data-value="{{ area.id }}">{{ area.name }}</div>
                             {% endfor %}
@@ -54,25 +63,23 @@
                     </div>
                 </div>
 
-                <!-- Professional Role -->
-                <div class="form-group">
-                    <label for="professional_role">Профессиональная область</label>
-                    <div class="select-wrapper">
-                        <select id="professional_role" name="professional_role">
-                            <option value="">Все области</option>
-                            {% for role in roles %}
-                            <option value="{{ role.id }}">{{ role.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                <div class="space-y-2">
+                    <label for="professional_role" class="hh-label">Профессиональная область</label>
+                    <select id="professional_role" name="professional_role" class="hh-select">
+                        <option value="">Все области</option>
+                        {% for role in roles %}
+                        <option value="{{ role.id }}">{{ role.name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="resume_period">Активность соискателя</label>
-                    <div class="select-wrapper">
-                        <select id="resume_period" name="resume_period">
+            <div class="border-t border-zinc-100 pt-6">
+                <p class="mb-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Ограничения выборки</p>
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div class="space-y-2">
+                        <label for="resume_period" class="hh-label">Активность соискателя</label>
+                        <select id="resume_period" name="resume_period" class="hh-select">
                             <option value="">За всё время</option>
                             <option value="1">Обновлялись за 1 день</option>
                             <option value="3">Обновлялись за 3 дня</option>
@@ -80,184 +87,10 @@
                             <option value="30" selected>Обновлялись за 30 дней</option>
                         </select>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Vacancy Filters -->
-        <div class="form-section vacancy-filters collapsible">
-            <h3 class="collapsible-header">
-                <span>💼 Фильтры для вакансий</span>
-                <span class="collapsible-arrow">▼</span>
-            </h3>
-            <div class="collapsible-content">
-            
-            <div class="form-row">
-                <!-- Employment Form (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_employment_form">Тип занятости</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_employment_form" name="vacancy_employment_form">
-                            <option value="">Любой</option>
-                            <option value="FULL">Полная</option>
-                            <option value="PART">Частичная</option>
-                            <option value="PROJECT">Проект</option>
-                            <option value="FLY_IN_FLY_OUT">Вахта</option>
-                            <option value="SIDE_JOB">Подработка</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Work Format (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_work_format">Формат работы</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_work_format" name="vacancy_work_format">
-                            <option value="">Любой</option>
-                            <option value="ON_SITE">На месте работодателя</option>
-                            <option value="REMOTE">Удалённо</option>
-                            <option value="HYBRID">Гибрид</option>
-                            <option value="FIELD_WORK">Разъездной</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Experience -->
-                <div class="form-group">
-                    <label for="vacancy_experience">Опыт работы</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_experience" name="vacancy_experience">
-                            <option value="">Не имеет значения</option>
-                            {% for exp in experiences %}
-                            <option value="{{ exp.id }}">{{ exp.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Education (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_education">Образование</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_education" name="vacancy_education">
-                            <option value="">Не требуется или не указано</option>
-                            <option value="not_required_or_not_specified">Не требуется или не указано</option>
-                            <option value="special_secondary">Среднее специальное</option>
-                            <option value="higher">Высшее</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Salary (single value, new API) -->
-                <div class="form-group">
-                    <label for="vacancy_salary">Зарплата</label>
-                    <input type="number" id="vacancy_salary" name="vacancy_salary" placeholder="100000">
-                </div>
-
-                <!-- Currency -->
-                <div class="form-group">
-                    <label for="vacancy_currency">Валюта</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_currency" name="vacancy_currency">
-                            <option value="">Любая</option>
-                            {% for curr in currencies %}
-                            <option value="{{ curr.id }}">{{ curr.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Salary Frequency (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_salary_frequency">Частота выплат</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_salary_frequency" name="vacancy_salary_frequency">
-                            <option value="">Любая</option>
-                            <option value="DAILY">Ежедневно</option>
-                            <option value="WEEKLY">Раз в неделю</option>
-                            <option value="TWICE_PER_MONTH">Два раза в месяц</option>
-                            <option value="MONTHLY">Раз в месяц</option>
-                            <option value="PER_PROJECT">За проект</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Salary Mode (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_salary_mode">Гранулярность зарплаты</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_salary_mode" name="vacancy_salary_mode">
-                            <option value="">Любая</option>
-                            <option value="MONTH">За месяц</option>
-                            <option value="SHIFT">За смену</option>
-                            <option value="HOUR">За час</option>
-                            <option value="FLY_IN_FLY_OUT">За вахту</option>
-                            <option value="SERVICE">За услугу</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Work Schedule by Days (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_work_schedule_by_days">График работы</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_work_schedule_by_days" name="vacancy_work_schedule_by_days">
-                            <option value="">Любой</option>
-                            <option value="SIX_ON_ONE_OFF">6/1</option>
-                            <option value="FIVE_ON_TWO_OFF">5/2</option>
-                            <option value="FOUR_ON_FOUR_OFF">4/4</option>
-                            <option value="FOUR_ON_THREE_OFF">4/3</option>
-                            <option value="FOUR_ON_TWO_OFF">4/2</option>
-                            <option value="THREE_ON_THREE_OFF">3/3</option>
-                            <option value="THREE_ON_TWO_OFF">3/2</option>
-                            <option value="TWO_ON_TWO_OFF">2/2</option>
-                            <option value="TWO_ON_ONE_OFF">2/1</option>
-                            <option value="ONE_ON_THREE_OFF">1/3</option>
-                            <option value="ONE_ON_TWO_OFF">1/2</option>
-                            <option value="WEEKEND">По выходным</option>
-                            <option value="FLEXIBLE">Свободный</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Working Hours (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_working_hours">Рабочие часы в день</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_working_hours" name="vacancy_working_hours">
-                            <option value="">Любые</option>
-                            <option value="HOURS_2">2 часа</option>
-                            <option value="HOURS_3">3 часа</option>
-                            <option value="HOURS_4">4 часа</option>
-                            <option value="HOURS_5">5 часов</option>
-                            <option value="HOURS_6">6 часов</option>
-                            <option value="HOURS_7">7 часов</option>
-                            <option value="HOURS_8">8 часов</option>
-                            <option value="HOURS_9">9 часов</option>
-                            <option value="HOURS_10">10 часов</option>
-                            <option value="HOURS_11">11 часов</option>
-                            <option value="HOURS_12">12 часов</option>
-                            <option value="HOURS_24">24 часа</option>
-                            <option value="FLEXIBLE">По договорённости</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Period -->
-                <div class="form-group">
-                    <label for="vacancy_period">Период публикации</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_period" name="vacancy_period">
+                    <div class="space-y-2">
+                        <label for="vacancy_period" class="hh-label">Период публикации вакансии</label>
+                        <select id="vacancy_period" name="vacancy_period" class="hh-select">
                             <option value="">За всё время</option>
                             <option value="1">1 день</option>
                             <option value="3">3 дня</option>
@@ -265,278 +98,143 @@
                             <option value="30">30 дней</option>
                         </select>
                     </div>
-                </div>
 
-                <!-- Vacancy Type (new API) -->
-                <div class="form-group">
-                    <label for="vacancy_type">Тип вакансии</label>
-                    <div class="select-wrapper">
-                        <select id="vacancy_type" name="vacancy_type">
-                            <option value="">Любой</option>
-                            <option value="open">Открытая</option>
-                            <option value="closed">Закрытая</option>
-                            <option value="anonymous">Анонимная</option>
-                            <option value="direct">Рекламная</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Label -->
-            <div class="form-group">
-                <label for="vacancy_label">Особые метки</label>
-                <div class="select-wrapper">
-                    <select id="vacancy_label" name="vacancy_label">
-                        <option value="">Все</option>
-                        <option value="with_salary">Только с указанной зарплатой</option>
-                        <option value="accept_handicapped">Только для людей с инвалидностью</option>
-                        <option value="accept_kids">Можно с детьми</option>
-                        <option value="not_from_agency">Без агентств</option>
-                        <option value="accredited_it">Только аккредитованные ИТ-компании</option>
-                        <option value="internship">Стажировка</option>
-                    </select>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Resume Filters -->
-        <div class="form-section resume-filters collapsible">
-            <h3 class="collapsible-header">
-                <span>👤 Фильтры для резюме</span>
-                <span class="collapsible-arrow">▼</span>
-            </h3>
-            <div class="collapsible-content">
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="resume_job_search_status">Статус поиска</label>
-                    <div class="select-wrapper">
-                        <select id="resume_job_search_status" name="resume_job_search_status">
+                    <div class="space-y-2">
+                        <label for="resume_job_search_status" class="hh-label">Статус резюме</label>
+                        <select id="resume_job_search_status" name="resume_job_search_status" class="hh-select">
                             <option value="">Все резюме</option>
                             {% for status in job_search_statuses %}
                             <option value="{{ status.id }}">{{ status.name }}</option>
                             {% endfor %}
                         </select>
                     </div>
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <!-- Education -->
-                <div class="form-group">
-                    <label for="resume_education">Образование</label>
-                    <div class="select-wrapper">
-                        <select id="resume_education" name="resume_education">
-                            <option value="">Любое</option>
-                            {% for edu in educations %}
-                            <option value="{{ edu.id }}">{{ edu.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
 
-                <!-- Relocation -->
-                <div class="form-group">
-                    <label for="resume_relocation">Готовность к переезду</label>
-                    <div class="select-wrapper">
-                        <select id="resume_relocation" name="resume_relocation">
-                            <option value="">Не важно</option>
-                            <option value="living_or_relocation">Живут в регионе или готовы переехать</option>
-                            <option value="living">Живут в указанном регионе</option>
-                            <option value="living_but_relocation">Живут в регионе и готовы к переезду</option>
-                            <option value="relocation">Готовы переехать в регион</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Gender -->
-                <div class="form-group">
-                    <label for="resume_gender">Пол</label>
-                    <div class="select-wrapper">
-                        <select id="resume_gender" name="resume_gender">
-                            <option value="">Любой</option>
-                            {% for g in genders %}
-                            <option value="{{ g.id }}">{{ g.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Currency -->
-                <div class="form-group">
-                    <label for="resume_currency">Валюта зарплаты</label>
-                    <div class="select-wrapper">
-                        <select id="resume_currency" name="resume_currency">
-                            <option value="">Любая</option>
-                            {% for curr in currencies %}
-                            <option value="{{ curr.id }}">{{ curr.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="resume_age_from">Возраст от</label>
-                    <input type="number" id="resume_age_from" name="resume_age_from" placeholder="18" min="14" max="100">
-                </div>
-
-                <div class="form-group">
-                    <label for="resume_age_to">Возраст до</label>
-                    <input type="number" id="resume_age_to" name="resume_age_to" placeholder="65" min="14" max="100">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="resume_salary_from">Желаемая зарплата от</label>
-                    <input type="number" id="resume_salary_from" name="resume_salary_from" placeholder="100000">
-                </div>
-
-                <div class="form-group">
-                    <label for="resume_salary_to">Желаемая зарплата до</label>
-                    <input type="number" id="resume_salary_to" name="resume_salary_to" placeholder="300000">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Employment form -->
-                <div class="form-group">
-                    <label for="resume_employment_form">Тип занятости</label>
-                    <div class="select-wrapper">
-                        <select id="resume_employment_form" name="resume_employment_form">
-                            <option value="">Любой</option>
-                            {% for emp in resume_employment_forms %}
-                            <option value="{{ emp.id }}">{{ emp.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Work format -->
-                <div class="form-group">
-                    <label for="resume_work_format">Формат работы</label>
-                    <div class="select-wrapper">
-                        <select id="resume_work_format" name="resume_work_format">
-                            <option value="">Любой</option>
-                            {% for wf in resume_work_formats %}
-                            <option value="{{ wf.id }}">{{ wf.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- Experience -->
-                <div class="form-group">
-                    <label for="resume_experience">Опыт работы</label>
-                    <div class="select-wrapper">
-                        <select id="resume_experience" name="resume_experience">
+                    <div class="space-y-2">
+                        <label for="vacancy_experience" class="hh-label">Опыт работы</label>
+                        <select id="vacancy_experience" name="vacancy_experience" class="hh-select">
                             <option value="">Не имеет значения</option>
                             {% for exp in experiences %}
                             <option value="{{ exp.id }}">{{ exp.name }}</option>
                             {% endfor %}
                         </select>
+                        <p class="hh-hint">Применяется к вакансиям и резюме одновременно</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="resume_language">Язык (код)</label>
-                    <input type="text" id="resume_language" name="resume_language" placeholder="eng, deu, fra...">
-                </div>
-
-                <div class="form-group">
-                    <label for="resume_language_level">Уровень владения</label>
-                    <div class="select-wrapper">
-                        <select id="resume_language_level" name="resume_language_level">
-                            <option value="">Любой</option>
-                            {% for level in language_levels %}
-                            <option value="{{ level.id }}">{{ level.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary" id="calculate-btn">
+        <!-- Hidden advanced filters (unchanged defaults) -->
+        <div hidden>
+            {% include "partials/hidden_filters.html" %}
+        </div>
+
+        <div class="flex items-center justify-between border-t border-zinc-200 bg-zinc-50/50 px-6 py-4">
+            <p class="text-xs text-zinc-500">Расчёт может занять до 40 секунд</p>
+            <button type="submit" class="hh-btn-primary" id="calculate-btn">
                 <span class="btn-text">Рассчитать</span>
-                <span class="btn-loader" style="display: none;">Загрузка...</span>
+                <span class="btn-loader hidden inline-flex items-center gap-2">Считаем…</span>
             </button>
         </div>
     </form>
 
-    <div id="results" class="results-container" style="display: none;">
-        <h2>Результаты</h2>
-        
-        <div class="stats-grid">
-            <div class="stat-card vacancies">
-                <div class="stat-icon">💼</div>
-                <div class="stat-value" id="vacancies-count">-</div>
-                <div class="stat-label">Вакансий</div>
-            </div>
-
-            <div class="stat-card resumes">
-                <div class="stat-icon">👤</div>
-                <div class="stat-value" id="resumes-count">-</div>
-                <div class="stat-label">Резюме</div>
-            </div>
-
-            <div class="stat-card ratio">
-                <div class="stat-icon">📊</div>
-                <div class="stat-value" id="ratio-value">-</div>
-                <div class="stat-label">Соотношение</div>
-            </div>
-
-            <div class="stat-card difference">
-                <div class="stat-icon">📈</div>
-                <div class="stat-value" id="difference-value">-</div>
-                <div class="stat-label">Разница</div>
-            </div>
-        </div>
-
-        <div class="result-meta">
-            <p>Данные актуальны на: <span id="timestamp">-</span></p>
-        </div>
-
-        <div id="query-debug" class="query-debug" style="display: none;">
-            <button type="button" class="collapsible-header debug-toggle" id="debug-toggle">
-                <span>Как считали</span>
-                <span class="collapsible-arrow">▼</span>
-            </button>
-            <div id="debug-content" class="debug-content">
-                <p id="debug-vacancies-note"></p>
-                <a id="debug-vacancies-url" href="#" target="_blank" rel="noopener"></a>
-                <p id="debug-resumes-note"></p>
-                <a id="debug-resumes-url" href="#" target="_blank" rel="noopener"></a>
-            </div>
-        </div>
-
-        <div class="result-actions">
-            <button type="button" id="copy-link-btn" class="btn btn-secondary">Скопировать ссылку</button>
-            <a id="trends-link" href="/trends" class="btn btn-secondary">Посмотреть тренды</a>
-            <a href="/auth/login" class="btn btn-secondary">Авторизация HH</a>
-        </div>
+    <!-- Error -->
+    <div id="error-message" class="hidden rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+        <p></p>
     </div>
 
-    <div id="error-message" class="error-message" style="display: none;">
-        <p></p>
+    <!-- Results -->
+    <div id="results" class="hidden space-y-6">
+        <div class="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <h2 class="text-lg font-semibold tracking-tight text-zinc-950">Результаты</h2>
+                <p class="text-xs text-zinc-500">Обновлено: <span id="timestamp">—</span></p>
+            </div>
+        </div>
+
+        <!-- KPI cards -->
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+                <p class="text-xs font-medium text-zinc-500">Вакансий</p>
+                <p class="kpi-value mt-2 text-2xl font-semibold text-zinc-950" id="vacancies-count">—</p>
+            </div>
+            <div class="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+                <p class="text-xs font-medium text-zinc-500">Резюме</p>
+                <p class="kpi-value mt-2 text-2xl font-semibold text-zinc-950" id="resumes-count">—</p>
+            </div>
+            <div class="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+                <p class="text-xs font-medium text-zinc-500">Соотношение</p>
+                <p class="kpi-value mt-2 text-2xl font-semibold text-zinc-950" id="ratio-value">—</p>
+                <p class="mt-1 text-xs text-zinc-500">вакансий на 1 резюме</p>
+            </div>
+            <div class="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm">
+                <p class="text-xs font-medium text-zinc-500">Разница</p>
+                <p class="kpi-value mt-2 text-2xl font-semibold text-zinc-950" id="difference-value">—</p>
+                <p class="mt-1 text-xs text-zinc-500">вакансии − резюме</p>
+            </div>
+        </div>
+
+        <!-- Market chart -->
+        <div class="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 flex items-center justify-between">
+                <div>
+                    <h3 class="text-sm font-semibold text-zinc-950">Спрос и предложение</h3>
+                    <p class="text-xs text-zinc-500">Сравнение объёма вакансий и резюме</p>
+                </div>
+            </div>
+            <div class="chart-box">
+                <canvas id="market-chart" aria-label="График вакансий и резюме"></canvas>
+            </div>
+        </div>
+
+        <!-- Insights -->
+        <div id="insights-panel" class="hidden space-y-6">
+            <div class="grid gap-6 lg:grid-cols-5">
+                <!-- Salary -->
+                <div class="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm lg:col-span-3">
+                    <h3 class="text-sm font-semibold text-zinc-950">Зарплата в вакансиях</h3>
+                    <p class="mt-3 text-xl font-semibold tracking-tight text-zinc-950" id="insights-salary-range">—</p>
+                    <p class="mt-1 text-xs text-zinc-500" id="insights-salary-meta"></p>
+
+                    <div class="mt-6 hidden" id="insights-salary-exp-chart-wrap">
+                        <p class="mb-3 text-xs font-medium text-zinc-500">Медиана по опыту</p>
+                        <div class="chart-box chart-box-sm">
+                            <canvas id="salary-exp-chart" aria-label="Зарплата по опыту"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 overflow-x-auto">
+                        <table class="insights-exp-table hidden" id="insights-salary-by-exp">
+                            <thead>
+                                <tr>
+                                    <th>Опыт</th>
+                                    <th>Диапазон</th>
+                                    <th>Медиана</th>
+                                </tr>
+                            </thead>
+                            <tbody id="insights-salary-by-exp-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm lg:col-span-2">
+                    <h3 class="text-sm font-semibold text-zinc-950">Топ навыков</h3>
+                    <p class="mt-1 text-xs text-zinc-500" id="insights-skills-meta"></p>
+                    <div class="mt-4 chart-box chart-box-sm hidden" id="insights-skills-chart-wrap">
+                        <canvas id="skills-chart" aria-label="Топ навыков"></canvas>
+                    </div>
+                    <ol class="insights-skills-list mt-4" id="insights-skills-list"></ol>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
-    window.HH_PREFILL = {{ prefill|tojson }};
+    window.APP_PREFILL = {{ prefill|tojson }};
 </script>
 <script src="/static/script.js"></script>
 {% endblock %}

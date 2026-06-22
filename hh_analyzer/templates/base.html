@@ -1,35 +1,94 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}HH.ru Analytics{% endblock %}</title>
+    <title>{% block title %}Аналитика рынка{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
-    {% block extra_css %}{% endblock %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        border: 'hsl(240 5.9% 90%)',
+                        input: 'hsl(240 5.9% 90%)',
+                        ring: 'hsl(240 5.9% 10%)',
+                        background: 'hsl(0 0% 100%)',
+                        foreground: 'hsl(240 10% 3.9%)',
+                        primary: {
+                            DEFAULT: 'hsl(240 5.9% 10%)',
+                            foreground: 'hsl(0 0% 98%)',
+                        },
+                        muted: {
+                            DEFAULT: 'hsl(240 4.8% 95.9%)',
+                            foreground: 'hsl(240 3.8% 46.1%)',
+                        },
+                        accent: {
+                            DEFAULT: 'hsl(234 89% 74%)',
+                            foreground: 'hsl(240 5.9% 10%)',
+                        },
+                        card: {
+                            DEFAULT: 'hsl(0 0% 100%)',
+                            foreground: 'hsl(240 10% 3.9%)',
+                        },
+                    },
+                    borderRadius: {
+                        lg: '0.5rem',
+                        md: 'calc(0.5rem - 2px)',
+                        sm: 'calc(0.5rem - 4px)',
+                    },
+                    boxShadow: {
+                        sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+                        card: '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)',
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="/static/calculator.css">
+    {% block extra_head %}{% endblock %}
 </head>
-<body>
-    <nav class="navbar">
-        <div class="container">
-            <a href="/" class="logo">HH Analytics</a>
-            <ul class="nav-links">
-                <li><a href="/">Калькулятор</a></li>
-                <li><a href="/stats">Статистика</a></li>
-            </ul>
-        </div>
-    </nav>
+<body class="min-h-full bg-zinc-50 font-sans text-zinc-950 antialiased">
+    <div class="flex min-h-full flex-col">
+        <header class="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/90 backdrop-blur-md">
+            <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-8">
+                    <a href="/" class="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-zinc-950">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-md bg-zinc-900 text-white">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                                <rect x="1" y="7" width="3" height="6" rx="0.5" fill="currentColor"/>
+                                <rect x="5.5" y="4" width="3" height="9" rx="0.5" fill="currentColor"/>
+                                <rect x="10" y="1" width="3" height="12" rx="0.5" fill="currentColor"/>
+                            </svg>
+                        </span>
+                        Аналитика рынка
+                    </a>
+                    <nav class="flex flex-wrap items-center gap-1" aria-label="Основная навигация">
+                        <a href="/" class="nav-link{% if request.url.path == '/' %} nav-link-active{% endif %}">Калькулятор</a>
+                        <a href="/dictionary" class="nav-link{% if request.url.path == '/dictionary' %} nav-link-active{% endif %}">Справочник ИТ</a>
+                        <a href="/stats" class="nav-link{% if request.url.path == '/stats' %} nav-link-active{% endif %}">Статистика</a>
+                    </nav>
+                </div>
+                <p class="hidden text-xs text-zinc-500 md:block">Аналитика вакансий и резюме</p>
+            </div>
+        </header>
 
-    <main class="container">
-        {% block content %}{% endblock %}
-    </main>
+        <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+            {% block content %}{% endblock %}
+        </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 HH.ru Analytics. Данные предоставлены api.hh.ru</p>
-        </div>
-    </footer>
+        <footer class="border-t border-zinc-200 bg-white py-6">
+            <div class="mx-auto max-w-6xl px-4 text-center text-xs text-zinc-500 sm:px-6 lg:px-8">
+                &copy; 2026 Аналитика рынка
+            </div>
+        </footer>
+    </div>
 
     {% block extra_js %}{% endblock %}
 </body>

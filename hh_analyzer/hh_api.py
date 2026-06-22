@@ -104,7 +104,7 @@ class HHAPIClient:
                 refresh_token=refresh_token,
             )
         self.last_request_time = 0
-        self.user_agent = os.getenv("HH_USER_AGENT", "HH-Analytics-App/1.0")
+        self.user_agent = os.getenv("HH_USER_AGENT", "Market-Analytics/1.0")
     
     def _make_request(self, endpoint: str, params: Optional[Dict] = None, retry_with_refresh: bool = True) -> Dict[str, Any]:
         """
@@ -354,7 +354,7 @@ class HHAPIClient:
         if not self.token_manager.access_token:
             raise Exception(
                 "Нет access token для поиска резюме. "
-                "Укажите HH_ACCESS_TOKEN / HH_REFRESH_TOKEN или авторизуйтесь через /auth/login"
+                "Укажите токены доступа или авторизуйтесь через /auth/login"
             )
         params = self._build_resume_params(**kwargs)
         print(f"\n[RESUME SEARCH REQUEST]")
@@ -592,6 +592,180 @@ class HHAPIClient:
                     "name": role["name"]
                 })
         return roles
+
+    def get_professional_roles_tree(self) -> List[Dict[str, Any]]:
+        """Professional roles grouped by category (as returned by HH API)."""
+        result = self._make_request("/professional_roles")
+        return result.get("categories", [])
+
+    def get_category_professional_roles(self, category_id: str) -> Dict[str, Any]:
+        """Roles for one category, e.g. category_id='11' for IT."""
+        for category in self.get_professional_roles_tree():
+            if str(category.get("id")) == str(category_id):
+                return {
+                    "id": category["id"],
+                    "name": category["name"],
+                    "roles": [
+                        {
+                            "id": role["id"],
+                            "name": role["name"],
+                        }
+                        for role in category.get("roles", [])
+                    ],
+                }
+        raise ValueError(f"Category not found: {category_id}")
+
+    IT_CATEGORY_ID = "11"
+
+    def search_vacancies_list(
+        self,
+        *,
+        page: int = 0,
+        per_page: int = 100,
+        **kwargs,
+    ) -> Dict[str, Any]:
+        """
+        Search vacancies and return full API page (items, found, pages).
+        HH limits: per_page <= 100, max 2000 items (page * per_page < 2000).
+        """
+        if per_page > 100:
+            raise ValueError("per_page must be <= 100")
+        if page * per_page >= 2000:
+            raise ValueError("HH API allows at most 2000 vacancies per query")
+        params = self._build_vacancy_params(per_page=per_page, **kwargs)
+        params["page"] = page
+        return self._make_request("/vacancies", params)
+
+    def get_vacancy(self, vacancy_id: str) -> Dict[str, Any]:
+        """Full vacancy card with key_skills and salary."""
+        return self._make_request(f"/vacancies/{vacancy_id}")
+
+    def get_vacancy_found(
+        self,
+        *,
+        professional_role: Optional[str] = None,
+        area: Optional[str] = None,
+        experience: Optional[str] = None,
+        period: Optional[int] = None,
+    ) -> int:
+        """Total vacancies count for a filter (one page, per_page=1)."""
+        result = self.search_vacancies_list(
+            page=0,
+            per_page=1,
+            professional_role=professional_role,
+            area=area,
+            experience=experience,
+            period=period,
+        )
+        return int(result.get("found") or 0)
+
+    def iter_vacancy_items(
+        self,
+        *,
+        professional_role: Optional[str] = None,
+        area: Optional[str] = None,
+        experience: Optional[str] = None,
+        period: Optional[int] = None,
+        per_page: int = 100,
+        max_pages: int = 20,
+    ):
+        """Yield {id, name} for vacancies matching filters (up to API page limit)."""
+        for page in range(max_pages):
+            result = self.search_vacancies_list(
+                page=page,
+                per_page=per_page,
+                professional_role=professional_role,
+                area=area,
+                experience=experience,
+                period=period,
+            )
+            items = result.get("items") or []
+            if not items:
+                break
+            for item in items:
+                vid = item.get("id")
+                name = (item.get("name") or "").strip()
+                if vid and name:
+                    yield {"id": str(vid), "name": name}
+            total_pages = result.get("pages") or 0
+            if page + 1 >= total_pages:
+                break
+
+    def get_area_clusters(
+        self,
+        *,
+        professional_role: str,
+        experience: Optional[str] = None,
+        exclude_area_ids: Optional[List[str]] = None,
+    ) -> List[Dict[str, Any]]:
+        """
+        Area buckets from clusters=true (areas that have vacancies for this filter).
+        Excludes aggregate Russia (113) by default.
+        """
+        import re
+
+        exclude = set(exclude_area_ids or ["113"])
+        params: Dict[str, Any] = {
+            "professional_role": professional_role,
+            "per_page": 1,
+            "clusters": True,
+        }
+        if experience:
+            params["experience"] = experience
+        result = self._make_request("/vacancies", params)
+        areas: List[Dict[str, Any]] = []
+        for cluster in result.get("clusters") or []:
+            if cluster.get("id") != "area":
+                continue
+            for item in cluster.get("items") or []:
+                match = re.search(r"area=(\d+)", item.get("url") or "")
+                if not match:
+                    continue
+                area_id = match.group(1)
+                if area_id in exclude:
+                    continue
+                areas.append(
+                    {
+                        "id": area_id,
+                        "name": item.get("name"),
+                        "count": int(item.get("count") or 0),
+                    }
+                )
+        return areas
+
+    EXPERIENCE_LEVELS = [
+        "noExperience",
+        "between1And3",
+        "between3And6",
+        "moreThan6",
+    ]
+
+    def iter_vacancy_titles_for_role(
+        self,
+        professional_role: str,
+        *,
+        per_page: int = 100,
+        max_pages: int = 20,
+        **kwargs,
+    ):
+        """Yield vacancy names for a professional_role (up to max_pages)."""
+        for page in range(max_pages):
+            result = self.search_vacancies_list(
+                page=page,
+                per_page=per_page,
+                professional_role=professional_role,
+                **kwargs,
+            )
+            items = result.get("items") or []
+            if not items:
+                break
+            for item in items:
+                name = (item.get("name") or "").strip()
+                if name:
+                    yield name
+            total_pages = result.get("pages") or 0
+            if page + 1 >= total_pages:
+                break
     
     def get_employments(self) -> List[Dict[str, Any]]:
         """Get list of employment types"""

@@ -1,0 +1,146 @@
+<select id="vacancy_employment_form" name="vacancy_employment_form">
+    <option value="">Любой</option>
+    <option value="FULL">Полная</option>
+    <option value="PART">Частичная</option>
+    <option value="PROJECT">Проект</option>
+    <option value="FLY_IN_FLY_OUT">Вахта</option>
+    <option value="SIDE_JOB">Подработка</option>
+</select>
+<select id="vacancy_work_format" name="vacancy_work_format">
+    <option value="">Любой</option>
+    <option value="ON_SITE">На месте работодателя</option>
+    <option value="REMOTE">Удалённо</option>
+    <option value="HYBRID">Гибрид</option>
+    <option value="FIELD_WORK">Разъездной</option>
+</select>
+<select id="vacancy_education" name="vacancy_education">
+    <option value="">Не требуется или не указано</option>
+    <option value="not_required_or_not_specified">Не требуется или не указано</option>
+    <option value="special_secondary">Среднее специальное</option>
+    <option value="higher">Высшее</option>
+</select>
+<input type="number" id="vacancy_salary" name="vacancy_salary" value="">
+<select id="vacancy_currency" name="vacancy_currency">
+    <option value="">Любая</option>
+    {% for curr in currencies %}
+    <option value="{{ curr.id }}">{{ curr.name }}</option>
+    {% endfor %}
+</select>
+<select id="vacancy_salary_frequency" name="vacancy_salary_frequency">
+    <option value="">Любая</option>
+    <option value="DAILY">Ежедневно</option>
+    <option value="WEEKLY">Раз в неделю</option>
+    <option value="TWICE_PER_MONTH">Два раза в месяц</option>
+    <option value="MONTHLY">Раз в месяц</option>
+    <option value="PER_PROJECT">За проект</option>
+</select>
+<select id="vacancy_salary_mode" name="vacancy_salary_mode">
+    <option value="">Любая</option>
+    <option value="MONTH">За месяц</option>
+    <option value="SHIFT">За смену</option>
+    <option value="HOUR">За час</option>
+    <option value="FLY_IN_FLY_OUT">За вахту</option>
+    <option value="SERVICE">За услугу</option>
+</select>
+<select id="vacancy_work_schedule_by_days" name="vacancy_work_schedule_by_days">
+    <option value="">Любой</option>
+    <option value="SIX_ON_ONE_OFF">6/1</option>
+    <option value="FIVE_ON_TWO_OFF">5/2</option>
+    <option value="FOUR_ON_FOUR_OFF">4/4</option>
+    <option value="FOUR_ON_THREE_OFF">4/3</option>
+    <option value="FOUR_ON_TWO_OFF">4/2</option>
+    <option value="THREE_ON_THREE_OFF">3/3</option>
+    <option value="THREE_ON_TWO_OFF">3/2</option>
+    <option value="TWO_ON_TWO_OFF">2/2</option>
+    <option value="TWO_ON_ONE_OFF">2/1</option>
+    <option value="ONE_ON_THREE_OFF">1/3</option>
+    <option value="ONE_ON_TWO_OFF">1/2</option>
+    <option value="WEEKEND">По выходным</option>
+    <option value="FLEXIBLE">Свободный</option>
+</select>
+<select id="vacancy_working_hours" name="vacancy_working_hours">
+    <option value="">Любые</option>
+    <option value="HOURS_2">2 часа</option>
+    <option value="HOURS_3">3 часа</option>
+    <option value="HOURS_4">4 часа</option>
+    <option value="HOURS_5">5 часов</option>
+    <option value="HOURS_6">6 часов</option>
+    <option value="HOURS_7">7 часов</option>
+    <option value="HOURS_8">8 часов</option>
+    <option value="HOURS_9">9 часов</option>
+    <option value="HOURS_10">10 часов</option>
+    <option value="HOURS_11">11 часов</option>
+    <option value="HOURS_12">12 часов</option>
+    <option value="HOURS_24">24 часа</option>
+    <option value="FLEXIBLE">По договорённости</option>
+</select>
+<select id="vacancy_type" name="vacancy_type">
+    <option value="">Любой</option>
+    <option value="open">Открытая</option>
+    <option value="closed">Закрытая</option>
+    <option value="anonymous">Анонимная</option>
+    <option value="direct">Рекламная</option>
+</select>
+<select id="vacancy_label" name="vacancy_label">
+    <option value="">Все</option>
+    <option value="with_salary">Только с указанной зарплатой</option>
+    <option value="accept_handicapped">Только для людей с инвалидностью</option>
+    <option value="accept_kids">Можно с детьми</option>
+    <option value="not_from_agency">Без агентств</option>
+    <option value="accredited_it">Только аккредитованные ИТ-компании</option>
+    <option value="internship">Стажировка</option>
+</select>
+<select id="resume_education" name="resume_education">
+    <option value="">Любое</option>
+    {% for edu in educations %}
+    <option value="{{ edu.id }}">{{ edu.name }}</option>
+    {% endfor %}
+</select>
+<select id="resume_relocation" name="resume_relocation">
+    <option value="">Не важно</option>
+    <option value="living_or_relocation">Живут в регионе или готовы переехать</option>
+    <option value="living">Живут в указанном регионе</option>
+    <option value="living_but_relocation">Живут в регионе и готовы к переезду</option>
+    <option value="relocation">Готовы переехать в регион</option>
+</select>
+<select id="resume_gender" name="resume_gender">
+    <option value="">Любой</option>
+    {% for g in genders %}
+    <option value="{{ g.id }}">{{ g.name }}</option>
+    {% endfor %}
+</select>
+<input type="number" id="resume_age_from" name="resume_age_from" value="">
+<input type="number" id="resume_age_to" name="resume_age_to" value="">
+<input type="number" id="resume_salary_from" name="resume_salary_from" value="">
+<input type="number" id="resume_salary_to" name="resume_salary_to" value="">
+<select id="resume_currency" name="resume_currency">
+    <option value="">Любая</option>
+    {% for curr in currencies %}
+    <option value="{{ curr.id }}">{{ curr.name }}</option>
+    {% endfor %}
+</select>
+<select id="resume_employment_form" name="resume_employment_form">
+    <option value="">Любой</option>
+    {% for emp in resume_employment_forms %}
+    <option value="{{ emp.id }}">{{ emp.name }}</option>
+    {% endfor %}
+</select>
+<select id="resume_work_format" name="resume_work_format">
+    <option value="">Любой</option>
+    {% for wf in resume_work_formats %}
+    <option value="{{ wf.id }}">{{ wf.name }}</option>
+    {% endfor %}
+</select>
+<select id="resume_experience" name="resume_experience">
+    <option value="">Не имеет значения</option>
+    {% for exp in experiences %}
+    <option value="{{ exp.id }}">{{ exp.name }}</option>
+    {% endfor %}
+</select>
+<input type="text" id="resume_language" name="resume_language" value="">
+<select id="resume_language_level" name="resume_language_level">
+    <option value="">Любой</option>
+    {% for level in language_levels %}
+    <option value="{{ level.id }}">{{ level.name }}</option>
+    {% endfor %}
+</select>

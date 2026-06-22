@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Статистика запросов - HH Analytics{% endblock %}
+{% block title %}Статистика запросов{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/legacy.css">
+{% endblock %}
 
 {% block content %}
 <div class="page-header">
@@ -28,7 +32,7 @@
             <tr>
                 <td>{{ query.timestamp.strftime('%d.%m.%Y %H:%M') }}</td>
                 <td>{{ query.text or '-' }}</td>
-                <td>{{ query.area or 'Все' }}</td>
+                <td>{% if query.area %}{{ area_names.get(query.area|string, query.area) }}{% else %}Все регионы{% endif %}</td>
                 <td class="number">{{ query.vacancies_count or 0 }}</td>
                 <td class="number">{{ query.resumes_count or 0 }}</td>
                 <td class="number">

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Справочник ИТ-ролей{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="/static/legacy.css">
+{% endblock %}
+
+{% macro render_entries(entries) %}
+<ol class="dict-entries-list">
+    {% for entry in entries %}
+    <li class="dict-entry" data-entry-label="{{ entry.name|lower }}">
+        <div class="dict-entry-row">
+            <span class="dict-entry-name">{{ entry.name }}</span>
+            <span class="dict-entry-count">{{ entry.count }}</span>
+        </div>
+        {% if entry.variants %}
+        <ul class="dict-variants-list">
+            {% for variant in entry.variants %}
+            <li class="dict-variant-item" data-title="{{ variant.name|lower }}">
+                <span class="dict-variant-name">{{ variant.name }}</span>
+                <span class="dict-variant-count">{{ variant.count }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ol>
+{% endmacro %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Справочник ИТ-ролей</h1>
+    {% if catalog %}
+    <p>
+        {{ catalog.category.name }} · вакансии за {{ catalog.period_days }} дней
+    </p>
+    {% if catalog.collected_at %}
+    <p class="dict-meta">Обновлено: {{ catalog.collected_at[:10] }}</p>
+    {% endif %}
+    {% else %}
+    <p>Словарь названий вакансий по профессиональным ролям</p>
+    {% endif %}
+</div>
+
+{% if error %}
+<div class="empty-state">
+    <p>{{ error }}</p>
+</div>
+{% elif catalog %}
+<div class="dict-toolbar">
+    <input
+        type="search"
+        id="dict-search"
+        class="dict-search-input"
+        placeholder="Поиск по направлению, роли или названию..."
+        autocomplete="off"
+    >
+    <label class="dict-toggle">
+        <input type="checkbox" id="dict-show-variants">
+        Показать варианты названий
+    </label>
+    <button type="button" class="btn btn-small" id="dict-expand-all">Развернуть всё</button>
+    <button type="button" class="btn btn-small btn-secondary" id="dict-collapse-all">Свернуть всё</button>
+</div>
+
+<div class="dict-groups" id="dict-groups">
+    {% for group in catalog.groups %}
+    <details class="dict-group" open data-group-id="{{ group.id }}">
+        <summary class="dict-group-summary">
+            <span class="dict-group-title">{{ group.name }}</span>
+            <span class="dict-group-badges">
+                <span class="dict-badge">{{ group.vacancies_count }} вак.</span>
+            </span>
+        </summary>
+        {% if group.description %}
+        <p class="dict-group-desc">{{ group.description }}</p>
+        {% endif %}
+
+        <div class="dict-roles">
+            {% for role in group.roles %}
+            <details class="dict-role" data-role-id="{{ role.id }}">
+                <summary class="dict-role-summary">
+                    <span class="dict-role-title">{{ role.name }}</span>
+                    <span class="dict-role-badges">
+                        <span class="dict-badge dict-badge-muted">{{ role.unique_vacancies }} вак.</span>
+                        {% if role.strategy == 'major_cities' %}
+                        <span class="dict-badge dict-badge-warn" title="Собрано только по крупным городам">города</span>
+                        {% endif %}
+                    </span>
+                </summary>
+
+                <div class="dict-role-body">
+                    {% if role.coverage_note %}
+                    <p class="dict-role-note">{{ role.coverage_note }}</p>
+                    {% endif %}
+
+                    <div class="dict-role-actions">
+                        <a href="/?professional_role={{ role.id }}" class="btn btn-small">
+                            Открыть в калькуляторе
+                        </a>
+                    </div>
+
+                    {% if role.top_skills %}
+                    <div class="dict-role-skills">
+                        <h4 class="dict-role-skills-title">Топ навыков (карта)</h4>
+                        {% if role.skills_sample_size %}
+                        <p class="dict-skills-meta">По {{ role.skills_sample_size }} вакансиям за 14 дней</p>
+                        {% endif %}
+                        <ol class="dict-skills-list">
+                            {% for skill in role.top_skills %}
+                            <li class="dict-skill-item">
+                                <span>{{ skill.name }}</span>
+                                <span class="dict-skill-count">{{ skill.count }}</span>
+                            </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                    {% endif %}
+
+                    {% if role.flat_entries %}
+                    {{ render_entries(role.flat_entries) }}
+                    {% elif role.seniority_levels %}
+                    <div class="dict-seniority-levels">
+                        {% for level in role.seniority_levels %}
+                        <details
+                            class="dict-seniority"
+                            data-seniority-label="{{ level.name|lower }} {{ level.search_aliases }}"
+                        >
+                            <summary class="dict-seniority-summary">
+                                <span class="dict-seniority-title">{{ level.name }}</span>
+                                <span class="dict-seniority-badges">
+                                    <span class="dict-badge">{{ level.total_count }} вак.</span>
+                                </span>
+                            </summary>
+                            {{ render_entries(level.entries) }}
+                        </details>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p class="dict-empty-titles">
+                        Названия по роли ещё не собраны.
+                    </p>
+                    {% endif %}
+                </div>
+            </details>
+            {% endfor %}
+        </div>
+    </details>
+    {% endfor %}
+</div>
+
+<div id="dict-no-results" class="empty-state" hidden>
+    <p>Ничего не найдено. Попробуйте другой запрос.</p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+{% if catalog %}
+<script src="/static/dictionary.js"></script>
+{% endif %}
+{% endblock %}

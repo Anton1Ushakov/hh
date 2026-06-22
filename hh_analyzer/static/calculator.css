@@ -1,0 +1,282 @@
+/* shadcn-style component layer for calculator (Tailwind CDN companion) */
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(240 3.8% 46.1%);
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.nav-link:hover {
+    color: hsl(240 10% 3.9%);
+    background-color: hsl(240 4.8% 95.9%);
+}
+
+.nav-link-active {
+    color: hsl(240 10% 3.9%);
+    background-color: hsl(240 4.8% 95.9%);
+}
+
+/* Form controls */
+.hh-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    color: hsl(240 10% 3.9%);
+}
+
+.hh-hint {
+    margin-top: 0.375rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: hsl(240 3.8% 46.1%);
+}
+
+.hh-input,
+.hh-select {
+    display: flex;
+    height: 2.5rem;
+    width: 100%;
+    border-radius: 0.375rem;
+    border: 1px solid hsl(240 5.9% 90%);
+    background-color: hsl(0 0% 100%);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: hsl(240 10% 3.9%);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hh-input::placeholder {
+    color: hsl(240 3.8% 46.1%);
+}
+
+.hh-input:focus,
+.hh-select:focus {
+    outline: none;
+    border-color: hsl(240 5.9% 10%);
+    box-shadow: 0 0 0 2px hsl(0 0% 100%), 0 0 0 4px hsl(240 5.9% 10% / 0.12);
+}
+
+.hh-select {
+    appearance: none;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.65rem center;
+    cursor: pointer;
+}
+
+/* Combobox / suggest */
+.searchable-select {
+    position: relative;
+}
+
+.searchable-select-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    max-height: 16rem;
+    overflow-y: auto;
+    display: none;
+    border-radius: 0.375rem;
+    border: 1px solid hsl(240 5.9% 90%);
+    background: hsl(0 0% 100%);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+}
+
+.searchable-select-list.active {
+    display: block;
+}
+
+.searchable-select-option {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: hsl(240 10% 3.9%);
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+.searchable-select-option:hover,
+.searchable-select-option.selected {
+    background-color: hsl(240 4.8% 95.9%);
+}
+
+.searchable-select-option.hidden {
+    display: none;
+}
+
+.suggest-section-label {
+    padding: 0.5rem 0.75rem 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: hsl(240 3.8% 46.1%);
+}
+
+/* Button */
+.hh-btn-primary {
+    display: inline-flex;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: hsl(240 5.9% 10%);
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(0 0% 98%);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.hh-btn-primary:hover:not(:disabled) {
+    background-color: hsl(240 5.9% 20%);
+}
+
+.hh-btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-loader {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-loader::after {
+    content: '';
+    width: 0.875rem;
+    height: 0.875rem;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: hh-spin 0.7s linear infinite;
+}
+
+@keyframes hh-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* KPI */
+.kpi-value {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+/* Insights table */
+.insights-exp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+}
+
+.insights-exp-table th {
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+    font-weight: 500;
+    color: hsl(240 3.8% 46.1%);
+    border-bottom: 1px solid hsl(240 5.9% 90%);
+}
+
+.insights-exp-table td {
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid hsl(240 5.9% 90%);
+    color: hsl(240 10% 3.9%);
+}
+
+.insights-exp-table td:not(:first-child) {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.insights-exp-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.insights-exp-table tbody tr:hover {
+    background-color: hsl(240 4.8% 95.9% / 0.6);
+}
+
+/* Skills list */
+.insights-skills-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.insights-skill-item {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid hsl(240 5.9% 90%);
+    font-size: 0.875rem;
+}
+
+.insights-skill-item:last-child {
+    border-bottom: none;
+}
+
+.insights-skill-rank {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: hsl(240 3.8% 46.1%);
+    font-variant-numeric: tabular-nums;
+}
+
+.insights-skill-name {
+    color: hsl(240 10% 3.9%);
+}
+
+.insights-skill-stats {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: hsl(240 5.9% 10%);
+    font-variant-numeric: tabular-nums;
+}
+
+.insights-skill-bar {
+    grid-column: 1 / -1;
+    height: 4px;
+    border-radius: 999px;
+    background: hsl(240 4.8% 95.9%);
+    overflow: hidden;
+}
+
+.insights-skill-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: hsl(240 5.9% 10%);
+}
+
+/* Chart containers */
+.chart-box {
+    position: relative;
+    height: 220px;
+    width: 100%;
+}
+
+.chart-box-sm {
+    height: 180px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-loader::after {
+        animation: none;
+    }
+}

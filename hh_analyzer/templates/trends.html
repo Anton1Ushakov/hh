@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Тренды: {{ query }} - HH Analytics{% endblock %}
+{% block title %}Тренды: {{ query }}{% endblock %}
 
-{% block extra_css %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% block extra_head %}
+<link rel="stylesheet" href="/static/legacy.css">
 {% endblock %}
 
 {% block content %}
@@ -50,6 +50,7 @@
 
 {% block extra_js %}
 {% if trends %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
     async function loadTrends() {
         const signature = "{{ signature }}";
